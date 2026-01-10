@@ -2,25 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Portfolio</title>
+  <title>Hacker Portfolio</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="terminal">
-    <p class="line">root@dzaky:~$ <span id="typing"></span></p>
 
-    <div class="content hidden" id="content">
-      <p>> Name      : Dzaky</p>
-      <p>> Role      : Web Developer</p>
-      <p>> Skills    : HTML | CSS | JavaScript</p>
-      <p>> GitHub    : <a href="https://github.com/dzakyzak71" target="_blank">github.com/dzakyzak71</a></p>
-      <p>> Status    : <span class="online">ONLINE</span></p>
+<canvas id="matrix"></canvas>
 
-      <button onclick="showMessage()">RUN SCRIPT</button>
-      <p id="message"></p>
-    </div>
-  </div>
+<div class="terminal">
+  <h1 class="glitch" data-text="ANONYMOUS">ANONYMOUS</h1>
+  <p>root@anonymous:~$ <span id="command"></span></p>
 
-  <script src="script.js"></script>
+  <div id="output"></div>
+
+  <input type="text" id="input" autofocus placeholder="type command...">
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

@@ -2,61 +2,75 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Courier New", monospace;
+  font-family: Courier, monospace;
 }
 
 body {
   background: black;
   color: #00ff00;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .terminal {
+  position: relative;
+  z-index: 2;
   width: 80%;
   max-width: 700px;
+  margin: 80px auto;
   border: 2px solid #00ff00;
   padding: 20px;
   box-shadow: 0 0 20px #00ff00;
+  background: rgba(0,0,0,0.8);
 }
 
-.line {
-  margin-bottom: 15px;
-}
-
-.content p {
-  margin: 8px 0;
+input {
+  width: 100%;
+  background: black;
+  border: none;
+  color: #00ff00;
+  outline: none;
+  margin-top: 10px;
 }
 
 a {
   color: #00ff00;
-  text-decoration: none;
 }
 
-a:hover {
-  text-shadow: 0 0 5px #00ff00;
-}
-
-button {
-  margin-top: 15px;
-  background: black;
+/* GLITCH EFFECT */
+.glitch {
+  font-size: 40px;
+  position: relative;
   color: #00ff00;
-  border: 1px solid #00ff00;
-  padding: 8px 15px;
-  cursor: pointer;
 }
 
-button:hover {
-  background: #00ff00;
-  color: black;
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
 }
 
-.online {
-  color: lime;
+.glitch::before {
+  color: red;
+  animation: glitch 1s infinite;
 }
 
-.hidden {
-  display: none;
+.glitch::after {
+  color: blue;
+  animation: glitch 1.2s infinite;
+}
+
+@keyframes glitch {
+  0% { top: 0; }
+  20% { top: -2px; }
+  40% { top: 2px; }
+  60% { top: -1px; }
+  80% { top: 1px; }
+  100% { top: 0; }
 }
