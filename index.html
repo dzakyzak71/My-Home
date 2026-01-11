@@ -1,59 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>Forum UI Clone — Portfolio</title>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Modern Landing Page</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<header class="header">
-  <div class="logo">Forum UI Clone</div>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Threads</a>
-    <a href="#">Members</a>
-    <a href="#">About</a>
-  </nav>
+<!-- NAVBAR -->
+<header class="nav-wrapper">
+  <div class="navbar-pill nav-hero">
+    <div class="logo">MyBrand</div>
+    <nav>
+      <a href="#home" class="active">Home</a>
+      <a href="#features">Features</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
 </header>
 
-<main class="forum-container">
-  
-  <section class="thread-post">
-    <div class="post-header">
-      <div class="avatar">AD</div>
-      <div class="user-info">
-        <span class="username">Administrator</span>
-        <span class="post-meta">Posted on Jan 1, 2026</span>
-      </div>
-    </div>
-    <div class="post-body">
-      <h2 class="post-title">Welcome to the Forum UI Clone</h2>
-      <p>This is a styled mockup post section similar to forum UI layouts.</p>
-      <p>Everything here is dummy content for a portfolio.</p>
-    </div>
-  </section>
+<!-- HERO -->
+<section class="hero" id="home" data-color="nav-hero">
+  <div class="hero-text">
+    <h1>Build Your Product Faster</h1>
+    <p>Modern landing page UI inspired by Canva</p>
+    <button id="ctaBtn">Get Started</button>
+  </div>
+</section>
 
-  <section class="thread-list">
-    <div class="thread">
-      <span class="thread-title">Example Thread #1</span>
-      <span class="thread-meta">by user123 • 10 replies</span>
-    </div>
-    <div class="thread">
-      <span class="thread-title">Example Thread #2</span>
-      <span class="thread-meta">by coder456 • 8 replies</span>
-    </div>
-    <div class="thread">
-      <span class="thread-title">Example Thread #3</span>
-      <span class="thread-meta">by hacker789 • 15 replies</span>
-    </div>
-  </section>
+<!-- FEATURES -->
+<section class="features" id="features" data-color="nav-light">
+  <div class="card fade-up">
+    <h3>Fast</h3>
+    <p>Optimized & lightweight</p>
+  </div>
+  <div class="card fade-up">
+    <h3>Responsive</h3>
+    <p>Looks good on all devices</p>
+  </div>
+  <div class="card fade-up">
+    <h3>Modern</h3>
+    <p>Clean & premium UI</p>
+  </div>
+</section>
 
-</main>
+<!-- CONTACT -->
+<section class="contact fade-up" id="contact" data-color="nav-dark">
+  <h2>Stay Connected</h2>
+  <form id="contactForm">
+    <input type="email" placeholder="Email kamu" required />
+    <button type="submit">Submit</button>
+  </form>
+</section>
 
-<footer class="footer">
-  UI Forum Clone — Portfolio Only
-</footer>
+<footer>© 2026 MyBrand</footer>
 
 <script src="script.js"></script>
 </body>
