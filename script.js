@@ -9,31 +9,51 @@ document.getElementById("contactForm")?.addEventListener("submit", e => {
   alert("Email terkirim!");
 });
 
-
-/* ================= NAVBAR COLOR SCROLL (FIXED) ================= */
-const navbar = document.querySelector(".navbar-pill");
+/* ================= NAV INDICATOR ================= */
+const nav = document.querySelector(".navbar-pill nav");
+const navLinks = document.querySelectorAll(".navbar-pill nav a");
 const sections = document.querySelectorAll("section");
-const colors = ["nav-hero", "nav-light", "nav-dark"];
 
-function updateNavbarColor() {
-  let current = "nav-hero"; // default = HOME saat refresh
+if (nav && navLinks.length && sections.length) {
+  const indicator = document.createElement("div");
+  indicator.className = "nav-indicator hide";
+  nav.appendChild(indicator);
 
-  sections.forEach(section => {
-    const rect = section.getBoundingClientRect();
+  function moveIndicator(el) {
+    const linkRect = el.getBoundingClientRect();
+    const navRect = nav.getBoundingClientRect();
+    indicator.style.width = linkRect.width + "px";
+    indicator.style.left = (linkRect.left - navRect.left) + "px";
+  }
 
-    // garis imajiner di bawah navbar
-    if (rect.top <= 100 && rect.bottom > 100) {
-      current = section.dataset.color;
+  function updateIndicator() {
+    let current = null;
+
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= 100 && rect.bottom > 100) {
+        current = section;
+      }
+    });
+
+    if (!current || current.id === "home") {
+      indicator.classList.add("hide");
+      return;
     }
-  });
 
-  colors.forEach(c => navbar.classList.remove(c));
-  navbar.classList.add(current);
+    const activeLink = nav.querySelector(
+      `a[href="#${current.id}"]`
+    );
+
+    if (!activeLink) return;
+
+    indicator.classList.remove("hide");
+    moveIndicator(activeLink);
+  }
+
+  window.addEventListener("scroll", updateIndicator);
+  window.addEventListener("load", updateIndicator);
 }
-
-window.addEventListener("scroll", updateNavbarColor);
-window.addEventListener("load", updateNavbarColor);
-
 
 /* ================= SCROLL REVEAL ================= */
 const revealElements = document.querySelectorAll(".fade-up");
@@ -47,12 +67,3 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.2 });
 
 revealElements.forEach(el => observer.observe(el));
-
-/* FIX: trigger on load */
-window.addEventListener("load", () => {
-  revealElements.forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight) {
-      el.classList.add("show");
-    }
-  });
-});
