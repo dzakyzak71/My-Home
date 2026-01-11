@@ -1,85 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Breach Archive — Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<title>Forum UI Clone — Portfolio</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<header class="topbar">
-  <div class="logo">BREACH ARCHIVE</div>
+<header class="header">
+  <div class="logo">Forum UI Clone</div>
   <nav>
     <a href="#">Home</a>
-    <a href="#">Leaks</a>
-    <a href="#">Assets</a>
+    <a href="#">Threads</a>
+    <a href="#">Members</a>
     <a href="#">About</a>
   </nav>
 </header>
 
-<section class="hero">
-  <h1>Data Exposure Monitoring</h1>
-  <p>Visualization & UI Portfolio — No Real Data</p>
-</section>
-
-<main class="container">
-
-  <section class="stats">
-    <div>
-      <span class="stat-number">128</span>
-      <span class="stat-label">Listings</span>
+<main class="forum-container">
+  
+  <section class="thread-post">
+    <div class="post-header">
+      <div class="avatar">AD</div>
+      <div class="user-info">
+        <span class="username">Administrator</span>
+        <span class="post-meta">Posted on Jan 1, 2026</span>
+      </div>
     </div>
-    <div>
-      <span class="stat-number">42</span>
-      <span class="stat-label">Assets</span>
-    </div>
-    <div>
-      <span class="stat-number">17</span>
-      <span class="stat-label">Regions</span>
-    </div>
-    <div>
-      <span class="stat-number online" id="onlineCount">56</span>
-      <span class="stat-label">Online</span>
+    <div class="post-body">
+      <h2 class="post-title">Welcome to the Forum UI Clone</h2>
+      <p>This is a styled mockup post section similar to forum UI layouts.</p>
+      <p>Everything here is dummy content for a portfolio.</p>
     </div>
   </section>
 
-  <section class="list">
-    <div class="list-header">Recent Listings</div>
-
-    <div class="item">
-      <img src="assets/flag-id.png" alt="ID">
-      <div class="item-content">
-        <h3>Asset Negara — Indonesia (Placeholder)</h3>
-        <p>Category: Government • Status: Archived</p>
-      </div>
-      <span class="tag">HIGH</span>
+  <section class="thread-list">
+    <div class="thread">
+      <span class="thread-title">Example Thread #1</span>
+      <span class="thread-meta">by user123 • 10 replies</span>
     </div>
-
-    <div class="item">
-      <img src="assets/flag-us.png" alt="US">
-      <div class="item-content">
-        <h3>Infrastructure Dataset — USA (Dummy)</h3>
-        <p>Category: Infrastructure • Status: Analysis</p>
-      </div>
-      <span class="tag medium">MEDIUM</span>
+    <div class="thread">
+      <span class="thread-title">Example Thread #2</span>
+      <span class="thread-meta">by coder456 • 8 replies</span>
     </div>
-
-    <div class="item">
-      <img src="assets/flag-eu.png" alt="EU">
-      <div class="item-content">
-        <h3>Public Records Index — EU (Mock)</h3>
-        <p>Category: Public Data • Status: Pending</p>
-      </div>
-      <span class="tag low">LOW</span>
+    <div class="thread">
+      <span class="thread-title">Example Thread #3</span>
+      <span class="thread-meta">by hacker789 • 15 replies</span>
     </div>
-
   </section>
 
 </main>
 
-<footer>
-  UI Simulation for Portfolio Purposes Only — No Real Breach Data
+<footer class="footer">
+  UI Forum Clone — Portfolio Only
 </footer>
 
 <script src="script.js"></script>
