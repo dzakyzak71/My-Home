@@ -10,6 +10,19 @@ html, body {
   min-height: 100%;
 }
 
+/* ================= Typing ================= */
+#typing::after {
+  content: "|";
+  animation: blink 1s infinite;
+  margin-left: 5px;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+
 /* ================= NAVBAR ================= */
 .nav-wrapper {
   position: fixed;
@@ -108,21 +121,68 @@ html, body {
 }
 
 /* ================= FEATURES ================= */
-.features {
-  padding: 5rem 2rem;
-  background: linear-gradient(180deg, #0f2a44, #0a1a2f);
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-  gap: 2rem;
+.profile {
+  display: flex;
+  justify-content: center;
+  padding: 60px 20px;
 }
 
-.card {
-  background: rgba(255,255,255,0.05);
-  color: rgb(255, 255, 255);
-  padding: 2rem;
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  background: #23264e;
+  padding: 30px;
   border-radius: 20px;
-  text-align: center;
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+  max-width: 800px;
+  width: 100%;
 }
+
+.profile-photo {
+  position: relative;
+  flex-shrink: 0;
+
+   display: flex;
+  flex-direction: column;   
+  align-items: center;
+  
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;  
+  object-fit: cover;   
+}
+
+
+.profile-logo {
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+}
+
+.photo-btn:hover {
+  background: #3730a3;
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.profile-info .role {
+  font-weight: 500;
+  color: #6b7280;
+  margin: 5px 0 10px;
+}
+
+.profile-info .bio {
+  line-height: 1.5;
+  color: #374151;
+}
+
 
 /* ================= CONTACT ================= */
 .contact {

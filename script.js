@@ -67,3 +67,39 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.2 });
 
 revealElements.forEach(el => observer.observe(el));
+
+/* ================= TYPING EFFECT HOME ================= */
+const texts = [
+  "Build Your Product Faster",
+  "Create Modern UI Design",
+  "Launch Your Startup Today"
+];
+
+let index = 0;
+let charIndex = 0;
+let isDeleting = false;
+const speed = 100;
+const delay = 1500;
+
+const typingElement = document.getElementById("typing");
+
+function typeEffect() {
+  const currentText = texts[index];
+
+  if (!isDeleting) {
+    typingElement.textContent = currentText.substring(0, charIndex++);
+    if (charIndex === currentText.length + 1) {
+      setTimeout(() => isDeleting = true, delay);
+    }
+  } else {
+    typingElement.textContent = currentText.substring(0, charIndex--);
+    if (charIndex === 0) {
+      isDeleting = false;
+      index = (index + 1) % texts.length;
+    }
+  }
+
+  setTimeout(typeEffect, isDeleting ? speed / 2 : speed);
+}
+
+typeEffect();
