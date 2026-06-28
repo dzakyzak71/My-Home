@@ -3,6 +3,86 @@ document.getElementById("ctaBtn")?.addEventListener("click", () => {
   alert("Let's get started 🚀");
 });
 
+/* ================= HACKER TERMINAL ================= */
+const terminalOutput = document.getElementById('terminalOutput');
+const terminalInput = document.getElementById('terminalInput');
+const terminalChips = document.querySelectorAll('.terminal-chip');
+
+function appendTerminalLine(text, isInput = false) {
+  if (!terminalOutput) return;
+
+  const line = document.createElement('div');
+  line.className = 'terminal-line';
+
+  if (isInput) {
+    line.innerHTML = `<span class="prompt">root@kconk:~$</span> ${text}`;
+  } else {
+    line.textContent = text;
+  }
+
+  terminalOutput.appendChild(line);
+  terminalOutput.scrollTop = terminalOutput.scrollHeight;
+}
+
+function runTerminalCommand(rawCommand) {
+  const command = rawCommand.trim().toLowerCase();
+  if (!command) return;
+
+  appendTerminalLine(rawCommand, true);
+
+  if (command === 'clear') {
+    terminalOutput.innerHTML = '';
+    return;
+  }
+
+  switch (command) {
+    case 'help':
+      appendTerminalLine('Available commands: help, whoami, ls, clear, date, theme, sudo, echo');
+      break;
+    case 'whoami':
+      appendTerminalLine('root');
+      break;
+    case 'ls':
+      appendTerminalLine('assets  index.html  script.js  styles.css');
+      break;
+    case 'date':
+      appendTerminalLine(new Date().toString());
+      break;
+    case 'theme':
+      appendTerminalLine('Theme switched to hacker neon');
+      break;
+    case 'sudo':
+      appendTerminalLine('Access denied: root privileges required');
+      break;
+    case 'echo':
+      appendTerminalLine('Type something after echo to print it');
+      break;
+    default:
+      if (command.startsWith('echo ')) {
+        appendTerminalLine(rawCommand.slice(5));
+      } else {
+        appendTerminalLine(`command not found: ${rawCommand}`);
+      }
+      break;
+  }
+}
+
+terminalInput?.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    runTerminalCommand(terminalInput.value);
+    terminalInput.value = '';
+  }
+});
+
+terminalChips.forEach((chip) => {
+  chip.addEventListener('click', () => {
+    const command = chip.dataset.command;
+    terminalInput.value = command;
+    runTerminalCommand(command);
+    terminalInput.value = '';
+  });
+});
+
 /* ================= CONTACT ================= */
 document.getElementById("contactForm")?.addEventListener("submit", e => {
   e.preventDefault();
