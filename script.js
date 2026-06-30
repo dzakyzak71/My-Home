@@ -1,6 +1,6 @@
 /* ================= CTA ================= */
 document.getElementById("ctaBtn")?.addEventListener("click", () => {
-  alert("Let's get started 🚀");
+  // CTA click handled by the link navigation.
 });
 
 /* ================= HACKER TERMINAL ================= */
@@ -83,10 +83,42 @@ terminalChips.forEach((chip) => {
   });
 });
 
+/* ================= PROFILE SLIDER ================= */
+const profileSlider = document.getElementById('profileSlider');
+let sliderActive = false;
+let sliderStartX = 0;
+let sliderScrollStart = 0;
+
+if (profileSlider) {
+  profileSlider.addEventListener('pointerdown', (event) => {
+    sliderActive = true;
+    sliderStartX = event.clientX;
+    sliderScrollStart = profileSlider.scrollLeft;
+    profileSlider.setPointerCapture(event.pointerId);
+    profileSlider.classList.add('dragging');
+  });
+
+  profileSlider.addEventListener('pointermove', (event) => {
+    if (!sliderActive) return;
+    const diff = event.clientX - sliderStartX;
+    profileSlider.scrollLeft = sliderScrollStart - diff * 1.1;
+    event.preventDefault();
+  });
+
+  profileSlider.addEventListener('pointerup', () => {
+    sliderActive = false;
+    profileSlider.classList.remove('dragging');
+  });
+
+  profileSlider.addEventListener('pointercancel', () => {
+    sliderActive = false;
+    profileSlider.classList.remove('dragging');
+  });
+}
+
 /* ================= CONTACT ================= */
 document.getElementById("contactForm")?.addEventListener("submit", e => {
   e.preventDefault();
-  alert("Email terkirim!");
 });
 
 /* ================= NAV INDICATOR ================= */
@@ -150,9 +182,9 @@ revealElements.forEach(el => observer.observe(el));
 
 /* ================= TYPING EFFECT HOME ================= */
 const texts = [
-  "Build Your Product Faster",
-  "Create Modern UI Design",
-  "Launch Your Startup Today"
+  "Hello, my name is Dzaky",
+  "My daily life as a cyber security expert",
+  "I am also a CTF player, bug hunter."
 ];
 
 let index = 0;
