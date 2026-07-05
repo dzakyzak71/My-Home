@@ -870,13 +870,78 @@ footer {
 }
 
 /* ================= MOBILE ================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 @media (max-width: 768px) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
   .navbar-pill nav {
     display: none;
   }
 
+  .hero {
+    padding: 100px 16px 40px;
+  }
+
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .hero-text {
+    max-width: none;
+    text-align: center;
+  }
+
   .hero h1 {
     font-size: 2.2rem;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-showcase {
+    margin-left: 0;
+    max-width: none;
+  }
+
+  .hero button,
+  .hero-link,
+  .terminal-chip,
+  .slider-card,
+  .slider-card:hover,
+  .hero-link:hover {
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .fade-up {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .profile {
+    padding: 50px 16px 90px;
+  }
+
+  .profile-slider {
+    scroll-behavior: auto;
   }
 
   .profile-scene {

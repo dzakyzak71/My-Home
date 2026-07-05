@@ -170,15 +170,19 @@ if (nav && navLinks.length && sections.length) {
 /* ================= SCROLL REVEAL ================= */
 const revealElements = document.querySelectorAll(".fade-up");
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
-    }
-  });
-}, { threshold: 0.2 });
+if (reduceMotion) {
+  revealElements.forEach(el => el.classList.add("show"));
+} else {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      }
+    });
+  }, { threshold: 0.2 });
 
-revealElements.forEach(el => observer.observe(el));
+  revealElements.forEach(el => observer.observe(el));
+}
 
 /* ================= TYPING EFFECT HOME ================= */
 const texts = [
@@ -194,6 +198,7 @@ const speed = 100;
 const delay = 1500;
 
 const typingElement = document.getElementById("typing");
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 768;
 
 function typeEffect() {
   const currentText = texts[index];
@@ -214,4 +219,8 @@ function typeEffect() {
   setTimeout(typeEffect, isDeleting ? speed / 2 : speed);
 }
 
-typeEffect();
+if (typingElement && !reduceMotion) {
+  typeEffect();
+} else if (typingElement) {
+  typingElement.textContent = texts[0];
+}
