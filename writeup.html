@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Writeup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="writeup.css" />
 </head>
@@ -13,56 +16,65 @@
       <div class="logo">MyBrand</div>
       <nav>
         <a href="index.html">Home</a>
-        <a href="writeup.html">writeup.html</a>
+        <a href="#writeup">Writeup</a>
       </nav>
     </div>
   </header>
 
-  <main class="writeup-page">
-    <section class="writeup-hero">
-      <div class="hero-content writeup-hero-grid">
-        <div class="hero-text">
-          <p class="eyebrow">Writeup</p>
-          <h1>Catat hasil CTF kamu di sini</h1>
-          <p class="hero-meta"><code>root@ctf:/writeup$ scan /assets/* --mode stealth</code></p>
-          <p>Setiap file <strong>.md</strong> di dalam kategori akan menambah skor otomatis dan menampilkan hasil writeup.</p>
-          <a href="index.html" class="hero-link">BACK TO HOME</a>
+  <section class="hero" id="home">
+    <div class="hero-content hero-content--score">
+      <div class="hero-text hero-text--score">
+        <p class="eyebrow">Writeup</p>
+        <h1>Progress Writeup</h1>
+        <div class="hero-actions">
+          <a href="index.html" id="ctaBtn" class="hero-link">Back to Home</a>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-card__header">
+          <div>
+            <p class="score-card__label">Writeup Score</p>
+            <h3>CTF Progress</h3>
+          </div>
+          <div class="score-card__value">84%</div>
         </div>
 
-        <div class="scoreboard-card">
-          <p class="eyebrow">Scoreboard</p>
-          <div class="score-gauge">
-            <div class="score-gauge-circle" id="scoreGauge" style="--progress: 0;">
-              <div class="score-gauge-center">
-                <span class="score-label">Score</span>
-                <span class="score-value" id="scoreValue">0</span>
-              </div>
-            </div>
+        <div class="score-chart" aria-label="Grafik progres writeup">
+          <svg id="progressChart" viewBox="0 0 320 140" role="img"></svg>
+        </div>
+
+        <div class="score-stats">
+          <div>
+            <span class="score-stats__label">Solved</span>
+            <strong>12</strong>
           </div>
-          <div class="score-summary">
-            <p class="score-note">Total writeup markdown ditemukan</p>
+          <div>
+            <span class="score-stats__label">Pending</span>
+            <strong>2</strong>
           </div>
-          <div class="score-progress">
-            <div id="scoreProgressFill" class="score-progress-fill"></div>
+          <div>
+            <span class="score-stats__label">Streak</span>
+            <strong>7d</strong>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="writeup-table-section">
-      <div class="writeup-shell">
+  <section class="writeup-section" id="writeup">
+    <div class="writeup-shell">
+      <div class="writeup-card">
         <div class="section-title">
-          <span class="slider-label">Writeup Table</span>
-          <h2>Hasil Writeup</h2>
+          <p class="eyebrow">Writeup</p>
+          <h2>Daftar challenge CTF</h2>
         </div>
         <div id="writeupTableContainer" class="writeup-table-container">
-          <div class="writeup-empty">
-            Memuat writeup... jika belum ada file markdown, tampil akan kosong.
-          </div>
+          <div class="writeup-empty">Memuat data writeup...</div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <script src="writeup.js"></script>
 </body>

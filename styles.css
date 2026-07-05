@@ -133,19 +133,21 @@ body::-webkit-scrollbar {
   justify-content: center;
   align-items: center;
   color: white;
-  padding: 120px 20px 80px;
+  padding: 110px 24px 70px;
 }
 
 .hero-content {
-  width: min(1200px, 100%);
+  width: min(1220px, 100%);
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 40px;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 48px;
   align-items: center;
+  margin: 0 auto;
 }
 
 .hero-text {
   text-align: left;
+  max-width: 620px;
 }
 
 .eyebrow {
@@ -483,6 +485,10 @@ body::-webkit-scrollbar {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  align-items: stretch;
+  width: 100%;
+  max-width: 520px;
+  margin-left: auto;
 }
 
 .terminal-shell {
@@ -581,11 +587,11 @@ body::-webkit-scrollbar {
 .profile {
   display: flex;
   justify-content: center;
-  padding: 80px 20px 120px;
+  padding: 80px 24px 120px;
 }
 
 .profile-shell {
-  width: min(1120px, 100%);
+  width: min(1220px, 100%);
 }
 
 .carousel-header {
@@ -629,9 +635,9 @@ body::-webkit-scrollbar {
 }
 
 .slider-card {
-  flex: 0 0 min(300px, calc(100vw - 80px));
-  width: min(300px, calc(100vw - 80px));
-  min-width: min(300px, calc(100vw - 80px));
+  flex: 0 0 min(300px, calc(100vw - 72px));
+  width: min(300px, calc(100vw - 72px));
+  min-width: min(300px, calc(100vw - 72px));
   min-height: 380px;
   height: auto;
   padding: 1.8rem 1.5rem;
