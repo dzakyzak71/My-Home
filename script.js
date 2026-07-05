@@ -83,6 +83,8 @@ terminalChips.forEach((chip) => {
   });
 });
 
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 768;
+
 /* ================= PROFILE SLIDER ================= */
 const profileSlider = document.getElementById('profileSlider');
 let sliderActive = false;
@@ -198,7 +200,6 @@ const speed = 100;
 const delay = 1500;
 
 const typingElement = document.getElementById("typing");
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 768;
 
 function typeEffect() {
   const currentText = texts[index];
