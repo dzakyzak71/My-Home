@@ -142,6 +142,7 @@ c3 = m³ + noise3 (mod n3)
 Noise ini menyebabkan CRT tidak menghasilkan solusi yang eksak.
 
 Implementasi CRT (gagal)
+
 ```
 from sympy.ntheory.modular import crt
 from gmpy2 import iroot
@@ -173,6 +174,7 @@ print("Mencoba semua kombinasi CRT...")
 try_crt_combination(n1, n2, c1, c2, "c1,c2")
 try_crt_combination(n1, n3, c1, c3, "c1,c3")
 try_crt_combination(n2, n3, c2, c3, "c2,c3")
+
 ```
 output
 ```
@@ -257,7 +259,13 @@ for n, c, label in [(n1, c1, "c1"), (n2, c2, "c2"), (n3, c3, "c3")]:
         print(f"Flag: {flag}")
         print(f"{'='*60}")
         break
+        
         ```
+
+
+Output
+
+```
 
 🔍 Mencoba ekstraksi flag dari akar pangkat 3...
 
@@ -276,7 +284,7 @@ Flag: LYKNCTF{n01sy_CRT_w1th_K4nn4n_3mb3dd1ng}
 ============================================================
 ```
 
-Verifikasi Flag
+Verifikasi Flag :
 
 ```
 # Verifikasi flag
