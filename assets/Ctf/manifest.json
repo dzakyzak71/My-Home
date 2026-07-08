@@ -17,6 +17,12 @@
       "challenge": "Noisy Broadcast",
       "fileName": "Noisy Broadcast.md",
       "url": "assets/Ctf/Cryptography/Noisy Broadcast/Noisy Broadcast.md"
+    },
+     {
+      "ctfType": "Cryptography",
+      "challenge": "Hash Dash",
+      "fileName": "Hash Dash.md",
+      "url": "assets/Ctf/Cryptography/Hash Dash/Hash Dash.md"
     }
   ]
 }

@@ -40,9 +40,9 @@ Recover plaintext (flag) dari ciphertext yang diberikan dengan:
 
 ---
 
-## 🧠 Analisis Awal
+#### 🧠 Analisis Awal
 
-### 1. Memahami Skema Enkripsi
+#### 1. Memahami Skema Enkripsi
 
 Dari parameter yang diberikan, ini adalah implementasi RSA dengan:
 - **Eksponen publik:** `e = 3` (sangat kecil)
@@ -57,7 +57,7 @@ c3 ≡ m³ (mod n3)
 ```
 
 
-### 2. Observasi Ciphertext
+#### 2. Observasi Ciphertext
 
 Mari kita periksa pola ciphertext:
 
@@ -114,7 +114,7 @@ Hex ini jika didecode:
 = LYKNCTF{n01sy_CRT_w1th_K4nn4n_3mb3dd1ng}
 ```
 
-### Identifikasi Kerentanan
+#### Identifikasi Kerentanan
 1. Håstad's Broadcast Attack
 Karena`e = 3`dan pesan yang sama dikirim ke `3` penerima, kita bisa menggunakan Håstad's Broadcast Attack:
 
@@ -259,7 +259,7 @@ for n, c, label in [(n1, c1, "c1"), (n2, c2, "c2"), (n3, c3, "c3")]:
         print(f"Flag: {flag}")
         print(f"{'='*60}")
         break
-        
+
         ```
 
 
