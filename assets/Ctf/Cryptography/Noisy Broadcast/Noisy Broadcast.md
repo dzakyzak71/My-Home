@@ -1,5 +1,4 @@
-# Write-Up: Noisy Broadcast Attack
-## Kriptanalisis RSA dengan Eksponen Kecil dan Noise
+
 
 **Kategori:** Cryptography  
 **Tingkat Kesulitan:** Medium  
