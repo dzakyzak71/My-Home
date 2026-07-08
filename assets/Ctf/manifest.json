@@ -11,6 +11,12 @@
       "challenge": "Neuron Express 0",
       "fileName": "Neuron Express 0.md",
       "url": "assets/Ctf/Reverse Engineering/Neuron Express 0/Neuron Express 0.md"
+    },
+    {
+      "ctfType": "Cryptography",
+      "challenge": "Noisy Broadcast",
+      "fileName": "Noisy Broadcast.md",
+      "url": "assets/Ctf/Cryptography/Noisy Broadcast/Noisy Broadcast.md"
     }
   ]
 }
