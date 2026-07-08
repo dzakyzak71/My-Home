@@ -200,7 +200,7 @@ Mengapa Ini Bekerja?
 - Representasi hex dari ∛c' masih readable
 
 Implementasi Solusi
-```
+
 output:
 ```
 from gmpy2 import iroot
