@@ -23,6 +23,13 @@
       "challenge": "Hash Dash",
       "fileName": "Hash Dash.md",
       "url": "assets/Ctf/Cryptography/Hash Dash/Hash Dash.md"
+    },
+     {
+      "ctfType": "Cryptography",
+      "challenge": "Stream Calibration",
+      "fileName": "Stream Calibration.md",
+      "url": "assets/Ctf/Cryptography/Stream Calibration/Stream Calibration.md"
+    
     }
   ]
 }

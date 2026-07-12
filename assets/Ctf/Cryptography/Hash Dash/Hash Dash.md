@@ -1,4 +1,4 @@
-#### 🔍 Analisis Awal
+####  Analisis Awal
 
 Saat terhubung ke server menggunakan `netcat`, kita mendapatkan respons berikut:
 

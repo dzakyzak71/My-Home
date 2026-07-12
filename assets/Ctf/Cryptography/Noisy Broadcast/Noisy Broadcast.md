@@ -1,15 +1,6 @@
+--
 
-
-**Kategori:** Cryptography  
-**Tingkat Kesulitan:** Medium  
-**Tools:** Python 3, gmpy2, pycryptodome, sympy  
-**Flag Format:** LYKNCTF{...}
-
-
-
----
-
-## 📋 Deskripsi Challenge
+##  Deskripsi Challenge
 
 ### Soal
 
@@ -40,7 +31,7 @@ Recover plaintext (flag) dari ciphertext yang diberikan dengan:
 
 ---
 
-#### 🧠 Analisis Awal
+####  Analisis Awal
 
 #### 1. Memahami Skema Enkripsi
 
