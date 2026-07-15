@@ -30,6 +30,13 @@
       "fileName": "Stream Calibration.md",
       "url": "assets/Ctf/Cryptography/Stream Calibration/Stream Calibration.md"
     
+    },
+         {
+      "ctfType": "Cryptography",
+      "challenge": "Still Alive",
+      "fileName": "Still Alive.md",
+      "url": "assets/Ctf/Cryptography/Still Alive/SStill Alive.md"
+    
     }
   ]
 }
