@@ -1,7 +1,7 @@
 const writeupTableContainer = document.getElementById('writeupTableContainer');
 const manifestPath = 'assets/Ctf/manifest.json';
 const MAX_SCORE = 1000;
-const POINTS_PER_WRITEUP = 100;
+const POINTS_PER_WRITEUP = 1;
 
 function escapeHtml(value) {
   return String(value)
@@ -162,7 +162,7 @@ function updateScoreCard(entries) {
 
   const solved = entries.length;
   const value = Math.min(MAX_SCORE, solved * POINTS_PER_WRITEUP);
-  const progress = Math.round((value / MAX_SCORE) * 100);
+  const progress = Math.round((value / MAX_SCORE) * 1000) / 10;
   const remaining = Math.max(0, MAX_SCORE - value);
 
   scoreValue.innerHTML = `<strong>${value}</strong><span>PTS</span>`;
