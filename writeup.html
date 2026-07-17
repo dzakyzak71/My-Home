@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Writeup</title>
+  <title>CTF Writeup Room</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
@@ -13,49 +13,59 @@
 <body>
   <header class="nav-wrapper">
     <div class="navbar-pill">
-      <div class="logo">MyBrand</div>
-      <nav>
+      <a class="logo" href="index.html" aria-label="Kembali ke halaman utama">
+        <span class="logo-mark">&gt;_</span>
+        <span>CTF ROOM</span>
+      </a>
+      <nav aria-label="Navigasi utama">
         <a href="index.html">Home</a>
-        <a href="#writeup">Writeup</a>
+        <a href="#scoreboard">Scoreboard</a>
+        <a href="#writeup" class="is-active">Writeups</a>
       </nav>
     </div>
   </header>
 
-  <section class="hero" id="home">
-    <div class="hero-content hero-content--score">
-      <div class="hero-text hero-text--score">
-        <p class="eyebrow">Writeup</p>
-        <h1>Progress Writeup</h1>
-        <div class="hero-actions">
-          <a href="index.html" id="ctaBtn" class="hero-link">Back to Home</a>
+  <section class="hero" id="scoreboard">
+    <div class="scoreboard-shell">
+      <div class="scoreboard-intro">
+        <div>
+          <p class="eyebrow">CTF Writeup Room</p>
+          <h1>Writeup <span>scoreboard.</span></h1>
+          <p class="hero-description">Setiap write-up yang masuk menambah 100 poin dan membentuk grafik progres menuju 1000 poin.</p>
+        </div>
+        <div class="scoreboard-intro__actions">
+          <span class="score-status"><i></i> Archive live</span>
+          <a href="#writeup" id="ctaBtn" class="hero-link">Open archive <span aria-hidden="true">↓</span></a>
         </div>
       </div>
 
-      <div class="score-card">
+      <div class="score-card score-card--board">
         <div class="score-card__header">
           <div>
-            <p class="score-card__label">Writeup Score</p>
-            <h3>CTF Progress</h3>
+            <p class="score-card__label">Score progression</p>
+            <h3>CTF Writeup Progress</h3>
           </div>
-          <div class="score-card__value">84%</div>
+          <div class="score-card__value"><strong>0</strong><span>PTS</span></div>
         </div>
 
         <div class="score-chart" aria-label="Grafik progres writeup">
-          <svg id="progressChart" viewBox="0 0 320 140" role="img"></svg>
+          <svg id="progressChart" viewBox="0 0 1000 330" role="img"></svg>
         </div>
+
+        <div class="score-legend"><span class="score-legend__dot"></span>My writeup score <span class="score-legend__hint">Score increases when a Markdown writeup is added</span></div>
 
         <div class="score-stats">
           <div>
-            <span class="score-stats__label">Solved</span>
-            <strong>12</strong>
+            <span class="score-stats__label">Progress</span>
+            <strong>0%</strong>
           </div>
           <div>
-            <span class="score-stats__label">Pending</span>
-            <strong>2</strong>
+            <span class="score-stats__label">Writeups</span>
+            <strong>0</strong>
           </div>
           <div>
-            <span class="score-stats__label">Streak</span>
-            <strong>7d</strong>
+            <span class="score-stats__label">Remaining</span>
+            <strong>1000 pts</strong>
           </div>
         </div>
       </div>
@@ -66,8 +76,9 @@
     <div class="writeup-shell">
       <div class="writeup-card">
         <div class="section-title">
-          <p class="eyebrow">Writeup</p>
-          <h2>Daftar challenge CTF</h2>
+          <p class="eyebrow">Challenge archive</p>
+          <h2>Writeup berdasarkan kategori</h2>
+          <p>Archive disusun berdasarkan event CTF, kategori, lalu folder challenge. Buka write-up untuk membaca file Markdown dari setiap challenge.</p>
         </div>
         <div id="writeupTableContainer" class="writeup-table-container">
           <div class="writeup-empty">Memuat data writeup...</div>

@@ -1,42 +1,32 @@
 {
   "entries": [
     {
-      "ctfType": "Reverse Engineering",
-      "challenge": "Neuron Meet 2D-0",
-      "fileName": "Neuron Meet 2D-0.md",
-      "url": "assets/Ctf/Reverse Engineering/Neuron Meet 2D-0/Neuron Meet 2D-0.md"
-    },
-    {
-      "ctfType": "Reverse Engineering",
-      "challenge": "Neuron Express 0",
-      "fileName": "Neuron Express 0.md",
-      "url": "assets/Ctf/Reverse Engineering/Neuron Express 0/Neuron Express 0.md"
-    },
-    {
-      "ctfType": "Cryptography",
-      "challenge": "Noisy Broadcast",
-      "fileName": "Noisy Broadcast.md",
-      "url": "assets/Ctf/Cryptography/Noisy Broadcast/Noisy Broadcast.md"
-    },
-     {
-      "ctfType": "Cryptography",
-      "challenge": "Hash Dash",
-      "fileName": "Hash Dash.md",
-      "url": "assets/Ctf/Cryptography/Hash Dash/Hash Dash.md"
-    },
-     {
-      "ctfType": "Cryptography",
-      "challenge": "Stream Calibration",
-      "fileName": "Stream Calibration.md",
-      "url": "assets/Ctf/Cryptography/Stream Calibration/Stream Calibration.md"
-    
-    },
-         {
+      "ctfName": "Junior CTF",
       "ctfType": "Cryptography",
       "challenge": "Still Alive",
       "fileName": "Still Alive.md",
-      "url": "assets/Ctf/Cryptography/Still Alive/Still Alive.md"
-    
+      "url": "assets/Ctf/Juniorctf/Cryptography/Still Alive/Still Alive.md"
+    },
+    {
+      "ctfName": "Junior CTF",
+      "ctfType": "Cryptography",
+      "challenge": "Stream Calibration",
+      "fileName": "Stream Calibration.md",
+      "url": "assets/Ctf/Juniorctf/Cryptography/Stream Calibration/Stream Calibration.md"
+    },
+    {
+      "ctfName": "PicoCTF",
+      "ctfType": "Reverse",
+      "challenge": "Neuron Express 0",
+      "fileName": "Neuron Express 0.md",
+      "url": "assets/Ctf/PicoCtf/Reverse/Neuron Express 0/Neuron Express 0.md"
+    },
+    {
+      "ctfName": "PicoCTF",
+      "ctfType": "Reverse",
+      "challenge": "Neuron Meet 2D-0",
+      "fileName": "Neuron Meet 2D-0.md",
+      "url": "assets/Ctf/PicoCtf/Reverse/Neuron Meet 2D-0/Neuron Meet 2D-0.md"
     }
   ]
 }

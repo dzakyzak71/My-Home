@@ -1,5 +1,7 @@
 const writeupTableContainer = document.getElementById('writeupTableContainer');
 const manifestPath = 'assets/Ctf/manifest.json';
+const MAX_SCORE = 1000;
+const POINTS_PER_WRITEUP = 100;
 
 function escapeHtml(value) {
   return String(value)
@@ -159,42 +161,60 @@ function updateScoreCard(entries) {
   if (!scoreValue || !scoreStats.length) return;
 
   const solved = entries.length;
-  const pending = 0;
-  const maxValue = 1000;
-  const value = Math.min(maxValue, solved);
-  const progress = Math.round((value / maxValue) * 100);
+  const value = Math.min(MAX_SCORE, solved * POINTS_PER_WRITEUP);
+  const progress = Math.round((value / MAX_SCORE) * 100);
+  const remaining = Math.max(0, MAX_SCORE - value);
 
-  scoreValue.textContent = `${value}/1000`;
-  scoreStats[0].textContent = solved;
-  scoreStats[1].textContent = pending;
-  scoreStats[2].textContent = solved > 0 ? `${Math.min(30, solved)}d` : '0d';
+  scoreValue.innerHTML = `<strong>${value}</strong><span>PTS</span>`;
+  scoreStats[0].textContent = `${progress}%`;
+  scoreStats[1].textContent = solved;
+  scoreStats[2].textContent = `${remaining} pts`;
 
   if (chart) {
-    const width = 320;
-    const height = 140;
-    const paddingLeft = 36;
-    const paddingRight = 18;
-    const paddingTop = 20;
-    const paddingBottom = 24;
+    const width = 1000;
+    const height = 330;
+    const paddingLeft = 78;
+    const paddingRight = 28;
+    const paddingTop = 26;
+    const paddingBottom = 50;
     const innerWidth = width - paddingLeft - paddingRight;
     const innerHeight = height - paddingTop - paddingBottom;
-    const ratio = value / maxValue;
-    const currentX = paddingLeft + innerWidth * ratio;
-    const currentY = paddingTop + innerHeight - innerHeight * ratio;
+    const scoreHistory = Array.from({ length: solved + 1 }, (_, index) => Math.min(MAX_SCORE, index * POINTS_PER_WRITEUP));
+    const currentX = paddingLeft + innerWidth;
+    const currentY = paddingTop + innerHeight - innerHeight * (value / MAX_SCORE);
 
-    const ticks = [0, 250, 500, 750, 1000];
+    const ticks = [0, 250, 500, 750, MAX_SCORE];
     const tickMarkup = ticks.map(tick => {
-      const y = paddingTop + innerHeight - (tick / maxValue) * innerHeight;
+      const y = paddingTop + innerHeight - (tick / MAX_SCORE) * innerHeight;
       return `
         <line x1="${paddingLeft - 6}" y1="${y}" x2="${paddingLeft + innerWidth}" y2="${y}" class="chart-tick"></line>
-        <text x="${paddingLeft - 12}" y="${y + 4}" text-anchor="end" class="chart-label">${tick}</text>
+        <text x="${paddingLeft - 14}" y="${y + 4}" text-anchor="end" class="chart-label">${tick} pts</text>
       `;
     }).join('');
 
-    const pathD = `M ${paddingLeft} ${paddingTop + innerHeight} C ${paddingLeft + innerWidth * 0.3} ${paddingTop + innerHeight - innerHeight * 0.28 * ratio}, ${paddingLeft + innerWidth * 0.7} ${paddingTop + innerHeight - innerHeight * 0.7 * ratio}, ${currentX} ${currentY}`;
+    const points = scoreHistory.map((score, index) => {
+      const x = paddingLeft + (innerWidth * index) / Math.max(scoreHistory.length - 1, 1);
+      const y = paddingTop + innerHeight - (innerHeight * score) / MAX_SCORE;
+      return { x, y };
+    });
+    const pathD = points.reduce((path, point, index) => {
+      if (index === 0) return `M ${point.x} ${point.y}`;
+      const previous = points[index - 1];
+      return `${path} H ${point.x} V ${point.y}`;
+    }, '');
+    const areaD = `${pathD} L ${currentX} ${paddingTop + innerHeight} L ${paddingLeft} ${paddingTop + innerHeight} Z`;
+    const xLabels = points.map((point, index) => {
+      if (index !== 0 && index !== points.length - 1 && index % Math.ceil(points.length / 5) !== 0) return '';
+      return `<text x="${point.x}" y="${height - 16}" text-anchor="middle" class="chart-label">${index === 0 ? 'START' : `WU ${index}`}</text>`;
+    }).join('');
+    const pointMarkup = points.slice(1).map(point => `<circle cx="${point.x}" cy="${point.y}" r="4" class="chart-point"></circle>`).join('');
 
     chart.innerHTML = `
       <defs>
+        <linearGradient id="scoreArea" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#39ff88" stop-opacity="0.26"></stop>
+          <stop offset="100%" stop-color="#39ff88" stop-opacity="0"></stop>
+        </linearGradient>
         <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
           <path d="M0,0 L0,6 L6,3 z" fill="#39ff88"></path>
         </marker>
@@ -202,9 +222,11 @@ function updateScoreCard(entries) {
       <line x1="${paddingLeft}" y1="${paddingTop + innerHeight}" x2="${paddingLeft + innerWidth}" y2="${paddingTop + innerHeight}" class="chart-axis"></line>
       <line x1="${paddingLeft}" y1="${paddingTop}" x2="${paddingLeft}" y2="${paddingTop + innerHeight}" class="chart-axis"></line>
       ${tickMarkup}
+      <path d="${areaD}" class="chart-area"></path>
       <path d="${pathD}" class="chart-line" marker-end="url(#arrowhead)"></path>
-      <circle cx="${currentX}" cy="${currentY}" r="5" class="chart-point"></circle>
+      ${pointMarkup}
       <circle cx="${currentX}" cy="${currentY}" r="10" class="chart-point-glow"></circle>
+      ${xLabels}
     `;
   }
 }
@@ -220,41 +242,90 @@ async function buildWriteupTable() {
     return;
   }
 
-  const rows = await Promise.all(entries.map(async entry => {
+  const writeups = await Promise.all(entries.map(async entry => {
     const response = await fetch(entry.url);
     const markdown = response.ok ? await response.text() : 'Tidak dapat memuat isi markdown.';
     const content = parseMdToHtml(markdown);
 
-    return `
+    return {
+      ...entry,
+      content,
+    };
+  }));
+
+  const events = writeups.reduce((groups, entry) => {
+    const eventName = entry.ctfName || 'CTF Archive';
+    if (!groups[eventName]) groups[eventName] = {};
+    if (!groups[eventName][entry.ctfType]) groups[eventName][entry.ctfType] = [];
+    groups[eventName][entry.ctfType].push(entry);
+    return groups;
+  }, {});
+
+  const createCategoryTable = (category, categoryEntries, categoryIndex) => {
+    const rows = categoryEntries.map((entry, entryIndex) => `
       <tr>
-        <td>${escapeHtml(entry.ctfType)}</td>
-        <td>${escapeHtml(entry.challenge)}</td>
+        <td><span class="challenge-number">${String(entryIndex + 1).padStart(2, '0')}</span></td>
+        <td>
+          <strong>${escapeHtml(entry.challenge)}</strong>
+          <span class="challenge-path">/${escapeHtml(entry.challenge)}/</span>
+        </td>
         <td>${escapeHtml(entry.fileName)}</td>
         <td>
           <details class="writeup-details">
-            <summary>Lihat isi markdown</summary>
-            ${content}
+            <summary>Open writeup <span aria-hidden="true">↗</span></summary>
+            ${entry.content}
           </details>
         </td>
       </tr>
-    `;
-  }));
+    `).join('');
 
-  writeupTableContainer.innerHTML = `
-    <div class="table-scroll">
-      <table class="writeup-table">
-        <thead>
-          <tr>
-            <th>Tipe CTF</th>
-            <th>Judul Soal</th>
-            <th>Nama File</th>
-            <th>Isi Markdown</th>
-          </tr>
-        </thead>
-        <tbody>${rows.join('')}</tbody>
-      </table>
-    </div>
-  `;
+    return `
+      <article class="category-table" style="--category-index: ${categoryIndex}">
+        <div class="category-table__header">
+          <div>
+            <span class="category-table__eyebrow">Folder / ${escapeHtml(category)}</span>
+            <h3>${escapeHtml(category)}</h3>
+          </div>
+          <span class="category-table__count">${categoryEntries.length} writeup${categoryEntries.length > 1 ? 's' : ''}</span>
+        </div>
+        <div class="table-scroll">
+          <table class="writeup-table">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Judul soal</th>
+                <th>File Markdown</th>
+                <th>Writeup</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+      </article>
+    `;
+  };
+
+  const eventTables = Object.entries(events).map(([eventName, categories], eventIndex) => {
+    const categoryTables = Object.entries(categories)
+      .map(([category, categoryEntries], categoryIndex) => createCategoryTable(category, categoryEntries, categoryIndex))
+      .join('');
+    const challengeCount = Object.values(categories).reduce((total, entriesInCategory) => total + entriesInCategory.length, 0);
+
+    return `
+      <section class="ctf-event">
+        <div class="ctf-event__header">
+          <div>
+            <span class="ctf-event__eyebrow">CTF event / ${String(eventIndex + 1).padStart(2, '0')}</span>
+            <h3>${escapeHtml(eventName)}</h3>
+          </div>
+          <span class="ctf-event__count">${challengeCount} challenge${challengeCount > 1 ? 's' : ''}</span>
+        </div>
+        <div class="ctf-event__categories">${categoryTables}</div>
+      </section>
+    `;
+  }).join('');
+
+  writeupTableContainer.innerHTML = eventTables;
 }
 
 window.addEventListener('load', () => {
