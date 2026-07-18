@@ -698,8 +698,8 @@ Tidak langsung memanggil `next_prime()`.
 Hitung:
 ```
 diff = |n - p_base*q_base|
-7.2 Threshold
 ```
+#### 7.2 Threshold
 Gunakan:
 ```
 2^430
