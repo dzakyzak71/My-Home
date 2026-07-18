@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cryptography | CTF Book</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="writeup.css" />
+  <link rel="stylesheet" href="crypto.css" />
+</head>
+<body>
+  <header class="nav-wrapper">
+    <div class="navbar-pill">
+      <a class="logo" href="index.html" aria-label="Kembali ke halaman utama">
+        <span class="logo-mark">&gt;_</span><span>CTF ROOM</span>
+      </a>
+      <nav aria-label="Navigasi utama">
+        <a href="index.html">Home</a>
+        <a href="writeup.html">Writeups</a>
+        <a href="book.html">Book</a>
+        <a href="cryptography.html" class="is-active">Crypto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="crypto-page">
+    <section class="crypto-hero">
+      <div>
+        <p class="eyebrow">Chapter 01 / Cryptography</p>
+        <h1>Break the <span>pattern.</span><br />Understand the math.</h1>
+        <p>Catatan belajar crypto untuk CTF. Mulai dari encoding sederhana, lanjut ke kriptografi modern, sampai konsep quantum dan post-quantum.</p>
+      </div>
+      <aside class="crypto-map" aria-label="Urutan belajar cryptography">
+        <span>Learning path</span>
+        <ol>
+          <li>Encoding &amp; XOR</li>
+          <li>Hash &amp; symmetric crypto</li>
+          <li>RSA &amp; number theory</li>
+          <li>Quantum &amp; PQC</li>
+        </ol>
+      </aside>
+    </section>
+
+    <nav class="chapter-nav" aria-label="Daftar bab">
+      <a href="#easy">01 Easy</a>
+      <a href="#medium">02 Medium</a>
+      <a href="#hard">03 Advanced</a>
+      <a href="#attacks">CTF attacks</a>
+    </nav>
+
+    <section class="crypto-level" id="easy">
+      <div class="level-heading">
+        <span>01</span><div><p>Easy / fondasi</p><h2>Encoding &amp; operasi bit</h2></div>
+      </div>
+      <div class="lesson-grid">
+        <article class="lesson-card">
+          <span class="lesson-card__label">Encoding</span>
+          <h3>Base64</h3>
+          <p>Base64 bukan enkripsi; ia hanya mengubah byte menjadi karakter aman untuk teks. Biasanya berakhir dengan <code>=</code> atau <code>==</code>.</p>
+          <div class="formula">3 bytes (24 bit) → 4 blok × 6 bit</div>
+          <pre><code>"CTF" → Q1RG
+echo Q1RG | base64 -d</code></pre>
+        </article>
+        <article class="lesson-card">
+          <span class="lesson-card__label">Bitwise</span>
+          <h3>XOR</h3>
+          <p>XOR bernilai 1 bila kedua bit berbeda. Sifat terpentingnya: memakai key yang sama dua kali mengembalikan pesan awal.</p>
+          <div class="formula">cipher = plaintext ⊕ key<br />plaintext = cipher ⊕ key</div>
+          <pre><code>0 ⊕ 0 = 0    1 ⊕ 0 = 1
+0 ⊕ 1 = 1    1 ⊕ 1 = 0</code></pre>
+        </article>
+        <article class="lesson-card">
+          <span class="lesson-card__label">Klasik</span>
+          <h3>Caesar &amp; frequency</h3>
+          <p>Caesar menggeser alfabet sejumlah <code>k</code>. Untuk substitusi sederhana, frekuensi huruf dan kata umum membantu menemukan pola.</p>
+          <div class="formula">E<sub>k</sub>(x) = (x + k) mod 26</div>
+          <p class="lesson-note">CTF hint: cek ROT13, hex, binary, Base32, dan URL encoding sebelum mencoba hal rumit.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="crypto-level" id="medium">
+      <div class="level-heading">
+        <span>02</span><div><p>Medium / modern crypto</p><h2>Hash, block cipher, dan number theory</h2></div>
+      </div>
+      <div class="lesson-grid lesson-grid--two">
+        <article class="lesson-card">
+          <span class="lesson-card__label">Integrity</span>
+          <h3>Hash function</h3>
+          <p>Hash menghasilkan fingerprint tetap dari data. Hash yang baik sulit dibalik dan sulit dicari collision-nya. Password sebaiknya disimpan dengan password hash khusus seperti Argon2/bcrypt, bukan SHA-256 biasa.</p>
+          <div class="formula">h = H(message)</div>
+          <p class="lesson-note">CTF hint: identifikasi panjang dan format hash; jangan menganggap semua string hex adalah hash.</p>
+        </article>
+        <article class="lesson-card">
+          <span class="lesson-card__label">Symmetric</span>
+          <h3>AES &amp; mode</h3>
+          <p>AES memakai satu secret key untuk enkripsi/dekripsi. Mode operasi sangat penting: ECB membocorkan pola blok; GCM memberi kerahasiaan dan autentikasi bila nonce unik.</p>
+          <div class="formula">C = AES<sub>k</sub>(P)<br />P = AES<sup>-1</sup><sub>k</sub>(C)</div>
+          <p class="lesson-note">Hindari membuat crypto sendiri. Untuk aplikasi nyata gunakan library terpercaya dan AES-GCM/ChaCha20-Poly1305.</p>
+        </article>
+        <article class="lesson-card lesson-card--wide">
+          <span class="lesson-card__label">Public key</span>
+          <h3>RSA dasar</h3>
+          <p>RSA bergantung pada sulitnya memfaktorkan <code>n = p × q</code> ketika p dan q besar. Public key adalah <code>(n, e)</code>; private key menyertakan <code>d</code>.</p>
+          <div class="formula formula--steps">1. n = p × q &nbsp; | &nbsp; φ(n) = (p − 1)(q − 1)<br />2. pilih e, dengan gcd(e, φ(n)) = 1<br />3. d ≡ e<sup>-1</sup> (mod φ(n))<br />4. c ≡ m<sup>e</sup> (mod n) &nbsp; | &nbsp; m ≡ c<sup>d</sup> (mod n)</div>
+          <p class="lesson-note">Contoh ini hanya konsep. RSA nyata harus memakai padding aman seperti OAEP; jangan gunakan textbook RSA pada aplikasi sebenarnya.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="crypto-level" id="hard">
+      <div class="level-heading">
+        <span>03</span><div><p>Advanced / future crypto</p><h2>Quantum dan post-quantum cryptography</h2></div>
+      </div>
+      <div class="lesson-grid">
+        <article class="lesson-card">
+          <span class="lesson-card__label">Quantum</span>
+          <h3>Shor's algorithm</h3>
+          <p>Secara teori, komputer kuantum skala besar dapat mempercepat faktorisasi integer dan discrete logarithm. Ini mengancam RSA dan ECC.</p>
+          <div class="formula">RSA / ECC → rentan jika quantum fault-tolerant tersedia</div>
+        </article>
+        <article class="lesson-card">
+          <span class="lesson-card__label">Quantum</span>
+          <h3>Grover's algorithm</h3>
+          <p>Grover memberi percepatan akar-kuadrat untuk pencarian brute force. Efek praktisnya: gunakan ukuran key/hash yang lebih besar, misalnya keamanan 128-bit membutuhkan keluaran hash 256-bit terhadap preimage search.</p>
+          <div class="formula">O(N) → O(√N)</div>
+        </article>
+        <article class="lesson-card">
+          <span class="lesson-card__label">Post-quantum</span>
+          <h3>Lattice-based crypto</h3>
+          <p>Skema post-quantum memakai masalah matematika berbeda, seperti lattice. Contoh keluarga standar modern mencakup ML-KEM untuk key encapsulation dan ML-DSA untuk signature.</p>
+          <p class="lesson-note">Konsep yang perlu dikenali: LWE, module lattice, key encapsulation, dan hybrid migration.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="crypto-level crypto-level--attacks" id="attacks">
+      <div class="level-heading">
+        <span>CTF</span><div><p>Pattern recognition</p><h2>Contoh serangan yang sering muncul</h2></div>
+      </div>
+      <div class="attack-table-wrap">
+        <table class="attack-table">
+          <thead><tr><th>Gejala challenge</th><th>Kemungkinan masalah</th><th>Arah analisis aman</th></tr></thead>
+          <tbody>
+            <tr><td>String pendek dengan <code>=</code></td><td>Base64/Base32/encoding berlapis</td><td>Decode berulang dan cek apakah hasilnya punya format baru.</td></tr>
+            <tr><td>Byte acak, key pendek berulang</td><td>Repeating-key XOR</td><td>Uji panjang key dan score hasil plaintext berdasarkan karakter yang wajar.</td></tr>
+            <tr><td>Dua RSA modulus memakai faktor yang sama</td><td>Shared prime</td><td>Hitung <code>gcd(n₁, n₂)</code>; jika bukan 1, private key dapat direkonstruksi pada challenge.</td></tr>
+            <tr><td>RSA dengan e kecil dan pesan sangat kecil</td><td>Unpadded small exponent</td><td>Cek apakah <code>c = m<sup>e</sup></code> tanpa modulus wrap; ambil akar integer pada data challenge.</td></tr>
+            <tr><td>AES-ECB mengenkripsi input terkontrol</td><td>ECB pattern leak</td><td>Bandingkan blok ciphertext identik; gunakan hanya pada lingkungan CTF/lab.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ethics-note">Gunakan teknik ini hanya untuk challenge CTF, lab, atau sistem yang Anda miliki izin eksplisit untuk diuji.</p>
+    </section>
+  </main>
+</body>
+</html>

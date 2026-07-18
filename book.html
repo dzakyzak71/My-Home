@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CTF Book</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="writeup.css" />
+  <link rel="stylesheet" href="book.css" />
+</head>
+<body>
+  <header class="nav-wrapper">
+    <div class="navbar-pill">
+      <a class="logo" href="index.html" aria-label="Kembali ke halaman utama">
+        <span class="logo-mark">&gt;_</span>
+        <span>CTF ROOM</span>
+      </a>
+      <nav aria-label="Navigasi utama">
+        <a href="index.html">Home</a>
+        <a href="writeup.html">Writeups</a>
+        <a href="book.html" class="is-active">Book</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="book-page">
+    <section class="book-hero">
+      <div>
+        <p class="eyebrow">CTF knowledge base</p>
+        <h1>Your <span>book shelf.</span></h1>
+        <p>Kumpulan catatan, referensi, dan roadmap untuk menemani proses belajar CTF.</p>
+      </div>
+      <div class="book-hero__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M3.5 5.5A2.5 2.5 0 0 1 6 3h4.5A2.5 2.5 0 0 1 13 5.5V21a2.5 2.5 0 0 0-2.5-2.5H6A2.5 2.5 0 0 0 3.5 21V5.5Zm17 0A2.5 2.5 0 0 0 18 3h-4.5A2.5 2.5 0 0 0 11 5.5V21a2.5 2.5 0 0 1 2.5-2.5H18a2.5 2.5 0 0 1 2.5 2.5V5.5Z" /></svg>
+      </div>
+    </section>
+
+    <section class="book-grid" aria-label="Daftar buku CTF">
+      <article class="book-card book-card--featured">
+        <span class="book-card__tag">Start here</span>
+        <h2>CTF Field Notes</h2>
+        <p>Catatan dasar untuk reconnaissance, analisis challenge, dan menyusun write-up yang rapi.</p>
+        <a href="writeup.html">Lihat writeups <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="book-card">
+        <span class="book-card__number">01</span>
+        <h2>Cryptography</h2>
+        <p>Referensi cipher, encoding, hash, dan pola solve challenge crypto.</p>
+        <a href="cryptography.html">Open chapter <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="book-card">
+        <span class="book-card__number">02</span>
+        <h2>Reverse Engineering</h2>
+        <p>Catatan tools dan teknik membedah binary untuk challenge reverse.</p>
+        <span class="book-card__status">Coming soon</span>
+      </article>
+
+      <article class="book-card">
+        <span class="book-card__number">03</span>
+        <h2>Web Exploitation</h2>
+        <p>Checklist bug web dan payload yang sering muncul pada CTF.</p>
+        <span class="book-card__status">Coming soon</span>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

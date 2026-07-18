@@ -1,0 +1,38 @@
+body { color: #effff4; }
+
+.crypto-page { width: min(1180px, calc(100% - 48px)); margin: 0 auto; padding: 142px 0 96px; }
+.crypto-hero { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 2rem; align-items: end; margin-bottom: 2.4rem; }
+.crypto-hero h1 { margin: 0; font-size: clamp(2.35rem, 5vw, 4.25rem); line-height: 1.04; }
+.crypto-hero h1 span { color: #39ff88; }
+.crypto-hero > div > p:not(.eyebrow) { max-width: 640px; margin-top: 1rem; color: #b7d8c4; line-height: 1.75; }
+.crypto-map { padding: 1.2rem; border: 1px solid rgba(57,255,136,.2); border-radius: 16px; background: rgba(57,255,136,.055); }
+.crypto-map > span, .crypto-map li { font-family: 'Share Tech Mono', monospace; }
+.crypto-map > span { color: #7affb1; font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; }
+.crypto-map ol { display: grid; gap: .55rem; margin: .9rem 0 0 1.25rem; color: #d8f4e2; font-size: .84rem; }
+.chapter-nav { display: flex; gap: .55rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.chapter-nav a { padding: .55rem .75rem; border: 1px solid rgba(255,255,255,.12); border-radius: 7px; color: #a9d7ba; font-family: 'Share Tech Mono', monospace; font-size: .76rem; text-decoration: none; }
+.chapter-nav a:hover { border-color: rgba(57,255,136,.55); color: #75ffb0; }
+.crypto-level { padding: 2rem 0; border-top: 1px solid rgba(255,255,255,.1); }
+.level-heading { display: flex; align-items: flex-start; gap: .9rem; margin-bottom: 1.3rem; }
+.level-heading > span { min-width: 45px; padding-top: .25rem; color: #39ff88; font-family: 'Share Tech Mono', monospace; font-size: .78rem; letter-spacing: .08em; }
+.level-heading p { margin-bottom: .25rem; color: #77ad8a; font-family: 'Share Tech Mono', monospace; font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; }
+.level-heading h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+.lesson-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.lesson-grid--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.lesson-card { padding: 1.25rem; border: 1px solid rgba(191,255,215,.14); border-radius: 15px; background: linear-gradient(145deg, rgba(14,31,22,.92), rgba(4,13,10,.96)); }
+.lesson-card--wide { grid-column: span 2; }
+.lesson-card__label { color: #75ffaf; font-family: 'Share Tech Mono', monospace; font-size: .7rem; letter-spacing: .13em; text-transform: uppercase; }
+.lesson-card h3 { margin: .68rem 0; font-size: 1.25rem; }
+.lesson-card p { color: #bfdbc9; line-height: 1.7; font-size: .93rem; }
+.lesson-card code, .attack-table code { color: #8dffc0; font-family: 'Share Tech Mono', monospace; }
+.formula { margin: 1rem 0; padding: .75rem; border-left: 2px solid #39ff88; background: rgba(57,255,136,.07); color: #dcffe8; font-family: 'Share Tech Mono', monospace; font-size: .82rem; line-height: 1.7; }
+.formula--steps { font-size: .78rem; }
+.lesson-card pre { overflow-x: auto; padding: .8rem; border: 1px solid rgba(255,255,255,.08); border-radius: 8px; background: #020806; color: #a1ffc8; font-size: .78rem; line-height: 1.55; }
+.lesson-note { margin-top: 1rem; color: #84ac92 !important; font-size: .78rem !important; }
+.attack-table-wrap { overflow-x: auto; border: 1px solid rgba(191,255,215,.14); border-radius: 14px; }
+.attack-table { width: 100%; min-width: 760px; border-collapse: collapse; background: rgba(5,14,10,.9); }
+.attack-table th, .attack-table td { padding: 1rem; border-bottom: 1px solid rgba(255,255,255,.08); text-align: left; vertical-align: top; }
+.attack-table th { color: #79ffb3; font-family: 'Share Tech Mono', monospace; font-size: .73rem; letter-spacing: .1em; text-transform: uppercase; }
+.attack-table td { color: #c5dfce; font-size: .88rem; line-height: 1.55; }
+.ethics-note { margin-top: 1rem; color: #93ae9d; font-size: .82rem; line-height: 1.6; }
+@media (max-width: 760px) { .crypto-page { width: min(100% - 28px, 1180px); padding-top: 106px; } .crypto-hero { grid-template-columns: 1fr; gap: 1rem; } .crypto-map { max-width: none; } .lesson-grid, .lesson-grid--two { grid-template-columns: 1fr; } .lesson-card--wide { grid-column: auto; } }
