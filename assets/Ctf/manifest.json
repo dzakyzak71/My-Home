@@ -14,12 +14,26 @@
       "fileName": "Stream Calibration.md",
       "url": "assets/Ctf/Juniorctf/Cryptography/Stream Calibration/Stream Calibration.md"
     },
+     {
+      "ctfName": "Junior CTF",
+      "ctfType": "Cryptography",
+      "challenge": "Neurotoxin Diagnostics",
+      "fileName": "Neurotoxin Diagnostics.md",
+      "url": "assets/Ctf/Juniorctf/Cryptography/Neurotoxin Diagnostics/Neurotoxin Diagnostics.md"
+    },
     {
       "ctfName": "Junior CTF",
       "ctfType": "Cryptography",
       "challenge": "Meow Meow",
       "fileName": "Meow Meow.md",
       "url": "assets/Ctf/Juniorctf/Cryptography/Meow Meow/Meow Meow.md"
+    },
+    {
+      "ctfName": "Junior CTF",
+      "ctfType": "Cryptography",
+      "challenge": "WeightedCompanionCube",
+      "fileName": "WeightedCompanionCube.md",
+      "url": "assets/Ctf/Juniorctf/Cryptography/WeightedCompanionCube/WeightedCompanionCube.md"
     },
     {
       "ctfName": "PicoCTF",

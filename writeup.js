@@ -140,7 +140,7 @@ function formatInline(text) {
 
 async function loadWriteupEntries() {
   try {
-    const response = await fetch(manifestPath);
+    const response = await fetch(manifestPath, { cache: 'no-store' });
     if (!response.ok) {
       throw new Error('Manifest tidak ditemukan');
     }
@@ -243,7 +243,7 @@ async function buildWriteupTable() {
   }
 
   const writeups = await Promise.all(entries.map(async entry => {
-    const response = await fetch(entry.url);
+    const response = await fetch(entry.url, { cache: 'no-store' });
     const markdown = response.ok ? await response.text() : 'Tidak dapat memuat isi markdown.';
     const content = parseMdToHtml(markdown);
 
@@ -288,7 +288,7 @@ async function buildWriteupTable() {
           </div>
           <span class="category-table__count">${categoryEntries.length} writeup${categoryEntries.length > 1 ? 's' : ''}</span>
         </div>
-        <div class="table-scroll">
+        <div class="table-scroll${categoryEntries.length > 4 ? ' table-scroll--overflow' : ''}" tabindex="0" aria-label="Daftar writeup ${escapeHtml(category)}">
           <table class="writeup-table">
             <thead>
               <tr>
@@ -301,6 +301,7 @@ async function buildWriteupTable() {
             <tbody>${rows}</tbody>
           </table>
         </div>
+        ${categoryEntries.length > 4 ? `<p class="table-scroll__hint">↓ Scroll untuk melihat ${categoryEntries.length - 4} writeup lainnya</p>` : ''}
       </article>
     `;
   };
