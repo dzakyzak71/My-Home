@@ -37,7 +37,7 @@
     },
         {
       "ctfName": "Junior CTF",
-      "ctfType": "Cryptography",
+      "ctfType": "Forensic",
       "challenge": "Invoice Without A Bank",
       "fileName": "Invoice Without A Bank.md",
       "url": "assets/Ctf/Juniorctf/Cryptography/Invoice Without A Bank/Invoice Without A Bank.md"
