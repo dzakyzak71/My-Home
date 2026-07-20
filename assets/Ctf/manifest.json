@@ -35,6 +35,13 @@
       "fileName": "WeightedCompanionCube.md",
       "url": "assets/Ctf/Juniorctf/Cryptography/WeightedCompanionCube/WeightedCompanionCube.md"
     },
+    {
+      "ctfName": "Junior CTF",
+      "ctfType": "Cryptography",
+      "challenge": "Ucucuga",
+      "fileName": "Ucucuga.md",
+      "url": "assets/Ctf/Juniorctf/Cryptography/Ucucuga/Ucucuga.md"
+    },
         {
       "ctfName": "Junior CTF",
       "ctfType": "Forensic",
