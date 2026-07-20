@@ -79,9 +79,9 @@ Recover 30 Signatures             Recover Point Q
                       FLAG
 ```
 
-# Ucucuga — Cryptography (Nightmare)
+### Ucucuga — Cryptography (Nightmare)
 
-## Informasi challenge
+### Informasi challenge
 
 - **Event:** Junior.Crypt 2026 (GRODNO::CTF)
 - **Kategori:** Cryptography
@@ -90,14 +90,14 @@ Recover 30 Signatures             Recover Point Q
 
 Target challenge adalah memulihkan private key dari signing service yang crash, lalu memakai private key tersebut untuk membuka vault AES-GCM. Berkas `public.zip` berisi `capture.log`, `pubkey.txt`, `vault.json`, dan `crash_strings.txt`.
 
-## Hasil akhir
+### Hasil akhir
 
 ```text
 private_key = df416f62d1208db259780a3e870a7aa417bd9ca6b2546f91ca09ea044b863b31
 flag = grodno{suh@r1k1_3_k0r0chk1}
 ```
 
-## 1. Recon dan identifikasi jebakan
+#### 1. Recon dan identifikasi jebakan
 
 Pada awalnya semua file terlihat seperti implementasi ECDSA normal di atas `secp256k1`:
 
@@ -116,7 +116,7 @@ y² = x³ + 7 (mod p)
 
 Jika public key valid, nilai `y² - x³ (mod p)` harus sama dengan `7`. Pada challenge ini nilainya berbeda, tetapi tetap konsisten pada kurva lain dengan field prime yang sama.
 
-## 2. Memuat handout dan konstanta
+#### 2. Memuat handout dan konstanta
 
 ```python
 import base64
@@ -156,7 +156,7 @@ Fungsi setiap bagian:
 - `P` adalah prime field secp256k1, `N` adalah order standar secp256k1, dan `GX/GY` adalah generator standar.
 - `SMALL_FACTOR` adalah faktor kecil order kurva faulted yang akan membuat discrete log menjadi mungkin.
 
-## 3. Aritmetika titik pada kurva custom
+#### 3. Aritmetika titik pada kurva custom
 
 Kurva faulted tetap berbentuk short-Weierstrass dengan `a = 0`:
 
@@ -215,7 +215,7 @@ Penjelasan fungsi:
 - `point_neg()` dibutuhkan untuk giant step BSGS.
 - `point_mul()` memakai double-and-add sehingga perkalian scalar membutuhkan sekitar jumlah bit scalar, bukan penjumlahan berulang.
 
-## 4. Rekonstruksi parameter kurva `b`
+#### 4. Rekonstruksi parameter kurva `b`
 
 ```python
 def sqrt_mod(value: int) -> int:
@@ -246,7 +246,7 @@ Output parameter kurva:
 
 Inilah vulnerability utama: signer memakai sibling curve faulted, bukan secp256k1 asli. Group order sibling curve memiliki faktor kecil yang tidak seharusnya ada pada grup ECDSA kuat.
 
-## 5. Memulihkan generator dan order kurva
+#### 5. Memulihkan generator dan order kurva
 
 Generator custom mempertahankan `G.x` secp256k1, tetapi `G.y` berubah karena parameter `b` berubah.
 
@@ -294,7 +294,7 @@ Fungsi blok ini:
 - `point_mul(order, Q) is None` menguji apakah kandidat order menganulir public key.
 - `GROUP_ORDER // SMALL_FACTOR` nanti menjadi cofactor untuk memproyeksikan titik ke subgroup kecil.
 
-## 6. Mengambil `r`, `s`, dan lift titik nonce
+#### 6. Mengambil `r`, `s`, dan lift titik nonce
 
 Dalam ECDSA, nilai `r` berasal dari koordinat-x titik nonce `kG`. Karena itu `r` bisa di-lift kembali sebagai titik pada kurva faulted.
 
@@ -313,7 +313,7 @@ def lift_r(row: dict[str, object]) -> tuple[int, int]:
 
 Terdapat dua kandidat nonce point: `(r, y)` dan `(r, -y)`. Ambiguitas tanda ini ditangani kemudian dengan mencoba `2^8` kombinasi untuk delapan signature.
 
-## 7. Baby-step Giant-step untuk mendapatkan `k mod f`
+#### 7. Baby-step Giant-step untuk mendapatkan `k mod f`
 
 Faktor kecilnya adalah:
 
@@ -366,7 +366,7 @@ Penjelasan:
 - Saat target ditemukan di baby table, jawaban adalah `i * width + j`.
 - Delapan residue dipakai karena `8 × 34.9 > 256` bit; secara informasi cukup untuk memulihkan private scalar 256-bit melalui HNP.
 
-## 8. Mengubah leakage nonce menjadi Hidden Number Problem
+#### 8. Mengubah leakage nonce menjadi Hidden Number Problem
 
 Persamaan ECDSA:
 
@@ -410,7 +410,7 @@ Fungsi setiap variabel:
 - `constant_terms` menyimpan komponen `C`.
 - `error_bound` membatasi error lattice berdasarkan ukuran quotient nonce.
 
-## 9. LLL dan Babai nearest-plane
+#### 9. LLL dan Babai nearest-plane
 
 Bagian berikut membangun basis lattice, mereduksinya dengan LLL, lalu memakai Babai nearest-plane untuk mencari kandidat private key.
 
@@ -482,7 +482,7 @@ Penjelasan fungsi:
 - `HNPSolver.solve()` membuat target dari satu kombinasi residue nonce, menjalankan Babai dari vektor terakhir ke pertama, lalu menguji tetangga kecil hasil pembulatan.
 - `sympy.Matrix.lll()` adalah implementasi lattice reduction; `Fraction` dipakai supaya proyeksi Babai tetap exact.
 
-## 10. Menangani ambiguitas tanda dan memverifikasi private key
+#### 10. Menangani ambiguitas tanda dan memverifikasi private key
 
 Setiap nilai `r` memiliki dua lift point, sehingga residue nonce dapat bernilai `c` atau `-c mod f`. Untuk delapan signature ada `2⁸ = 256` kombinasi; jumlah ini kecil.
 
@@ -539,7 +539,7 @@ Private key yang dipulihkan:
 df416f62d1208db259780a3e870a7aa417bd9ca6b2546f91ca09ea044b863b31
 ```
 
-## 11. Mendekripsi vault AES-128-GCM
+#### 11. Mendekripsi vault AES-128-GCM
 
 Kunci vault berasal dari 16 byte pertama SHA-256 private key dalam format 32 byte big-endian.
 
@@ -563,13 +563,13 @@ Penjelasan:
 - Argumen terakhir `b""` berarti tidak ada Additional Authenticated Data.
 - Bila key salah atau ciphertext berubah, GCM akan gagal autentikasi dan melempar exception.
 
-## Flag
+### Flag
 
 ```text
 grodno{suh@r1k1_3_k0r0chk1}
 ```
 
-## Pelajaran penting
+### Pelajaran penting
 
 1. Saat point yang diklaim sebagai secp256k1 gagal memenuhi `y² = x³ + 7`, hitung parameter `b` yang benar sebelum mencoba transformasi endian atau decoding lain.
 2. Kurva faulted dapat mempunyai order yang sangat lemah walaupun memakai field prime yang sama dengan kurva terkenal.
@@ -577,7 +577,7 @@ grodno{suh@r1k1_3_k0r0chk1}
 4. Kebocoran beberapa bit nonce ECDSA dari banyak signature dapat diubah menjadi Hidden Number Problem dan diselesaikan menggunakan lattice.
 5. Telemetry yang tampak penting belum tentu dipakai oleh attack; selalu verifikasi hipotesis dengan persamaan kriptografi.
 
-## Lampiran — Reproduksi dari Jupyter Notebook
+### Lampiran — Reproduksi dari Jupyter Notebook
 
 Solve ini juga tersedia dalam notebook:
 
