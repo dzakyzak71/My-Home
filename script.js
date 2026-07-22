@@ -93,6 +93,7 @@ let sliderScrollStart = 0;
 
 if (profileSlider) {
   profileSlider.addEventListener('pointerdown', (event) => {
+    if (event.target.closest('a, button')) return;
     sliderActive = true;
     sliderStartX = event.clientX;
     sliderScrollStart = profileSlider.scrollLeft;
@@ -108,6 +109,11 @@ if (profileSlider) {
   });
 
   profileSlider.addEventListener('pointerup', () => {
+    sliderActive = false;
+    profileSlider.classList.remove('dragging');
+  });
+
+  profileSlider.addEventListener('lostpointercapture', () => {
     sliderActive = false;
     profileSlider.classList.remove('dragging');
   });

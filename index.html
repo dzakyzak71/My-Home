@@ -7,15 +7,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260722-profile" />
 </head>
 <body>
 
 <!-- NAVBAR -->
 <header class="nav-wrapper">
   <div class="navbar-pill">
-    <div class="logo">MyBrand</div>
-    <nav>
+    <a class="logo" href="index.html" aria-label="Kembali ke halaman utama">
+      <span class="logo-mark">&gt;_</span>
+      <span>CTF ROOM</span>
+    </a>
+    <nav aria-label="Navigasi utama">
       <a href="#home">Home</a>
       <a href="#profile">Profile</a>
       <a href="writeup.html">Writeups</a>
@@ -75,11 +78,20 @@
 <section class="profile fade-up" id="profile">
   <div class="profile-shell">
     <div class="carousel-header">
-      <div class="slider-title">Profile highlights</div>
+      <div class="profile-heading">
+        <span class="slider-title">Profile highlights</span>
+        <h2>Meet the operator.</h2>
+        <p>Security learner, CTF player, and builder from East Java.</p>
+      </div>
+      <span class="profile-status"><i></i> Available for the next challenge</span>
     </div>
 
     <div class="profile-slider" id="profileSlider">
       <div class="slider-card slider-card--profile">
+        <div class="profile-card-topline">
+          <span>OPERATOR / 001</span>
+          <span>ONLINE</span>
+        </div>
         <div class="profile-photo">
           <img src="assets/images/1.png" alt="Profile Photo" class="profile-img">
           <img src="assets/images/2.png" alt="Hacker Logo" class="profile-logo">
@@ -90,6 +102,12 @@
           <p class="bio">
            I am a solo player representing the team KOMANDO 71, and I am from Situbondo, East Java, Indonesia.
           </p>
+          <div class="profile-stats" aria-label="Profile statistics">
+            <div><strong>CTF</strong><span>Player</span></div>
+            <div><strong>71</strong><span>Komando</span></div>
+            <div><strong>ID</strong><span>East Java</span></div>
+          </div>
+          <a class="profile-link" href="writeup.html">Explore writeups <span aria-hidden="true">↗</span></a>
         </div>
       </div>
 
@@ -137,6 +155,6 @@
 
 
 
-<script src="script.js?v=2"></script>
+<script src="script.js?v=20260722-profile-link"></script>
 </body>
 </html>

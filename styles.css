@@ -73,11 +73,29 @@ body::-webkit-scrollbar {
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
   font-weight: 700;
   color: #7dffb4;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-family: 'Share Tech Mono', 'Courier New', monospace;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.logo-mark {
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  border-radius: 9px;
+  background: #39ff88;
+  color: #00170c;
+  font-size: 0.78rem;
+  letter-spacing: -0.12em;
+  box-shadow: 0 0 18px rgba(57, 255, 136, 0.35);
 }
 
 /* NAV */
@@ -587,7 +605,8 @@ body::-webkit-scrollbar {
 .profile {
   display: flex;
   justify-content: center;
-  padding: 80px 24px 120px;
+  padding: 110px 24px 140px;
+  background: radial-gradient(circle at 50% 30%, rgba(57, 255, 136, 0.07), transparent 34rem);
 }
 
 .profile-shell {
@@ -598,7 +617,42 @@ body::-webkit-scrollbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 18px;
+  gap: 2rem;
+  margin-bottom: 22px;
+}
+
+.profile-heading h2 {
+  margin-top: 0.38rem;
+  color: #f2fff6;
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  letter-spacing: -0.03em;
+}
+
+.profile-heading p {
+  margin-top: 0.35rem;
+  color: #8fbda0;
+  font-size: 0.92rem;
+}
+
+.profile-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid rgba(57, 255, 136, 0.2);
+  border-radius: 999px;
+  color: #9debb7;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.profile-status i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #39ff88;
+  box-shadow: 0 0 12px #39ff88;
 }
 
 .slider-title {
@@ -635,9 +689,9 @@ body::-webkit-scrollbar {
 }
 
 .slider-card {
-  flex: 0 0 min(300px, calc(100vw - 72px));
-  width: min(300px, calc(100vw - 72px));
-  min-width: min(300px, calc(100vw - 72px));
+  flex: 0 0 min(310px, calc(100vw - 72px));
+  width: min(310px, calc(100vw - 72px));
+  min-width: min(310px, calc(100vw - 72px));
   min-height: 380px;
   height: auto;
   padding: 1.8rem 1.5rem;
@@ -672,11 +726,29 @@ body::-webkit-scrollbar {
   justify-content: flex-start;
   gap: 0.9rem;
   align-items: center;
-  background: linear-gradient(145deg, rgba(10, 24, 18, 0.98), rgba(20, 44, 31, 0.95));
+  flex-basis: min(410px, calc(100vw - 72px));
+  width: min(410px, calc(100vw - 72px));
+  min-width: min(410px, calc(100vw - 72px));
+  background: radial-gradient(circle at 90% 0%, rgba(57, 255, 136, 0.2), transparent 35%), linear-gradient(145deg, rgba(10, 33, 21, 0.98), rgba(4, 15, 10, 0.98));
   transform: perspective(1000px) rotateY(-6deg) translateX(0px);
   opacity: 1;
-  padding: 1rem 1.25rem 1.25rem;
+  padding: 1rem 1.35rem 1.35rem;
+  border-color: rgba(57, 255, 136, 0.5);
   overflow: hidden;
+}
+
+.profile-card-topline {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: #70d997;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+}
+
+.profile-card-topline span:last-child {
+  color: #39ff88;
 }
 
 .slider-label {
@@ -765,6 +837,58 @@ body::-webkit-scrollbar {
   word-break: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
+}
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  gap: 0.45rem;
+  margin-top: 1rem;
+}
+
+.profile-stats div {
+  padding: 0.55rem 0.35rem;
+  border: 1px solid rgba(57, 255, 136, 0.14);
+  border-radius: 9px;
+  background: rgba(0, 0, 0, 0.16);
+  text-align: center;
+}
+
+.profile-stats strong,
+.profile-stats span {
+  display: block;
+}
+
+.profile-stats strong {
+  color: #caffd9;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.84rem;
+}
+
+.profile-stats span {
+  margin-top: 0.2rem;
+  color: #77a98a;
+  font-size: 0.65rem;
+}
+
+.profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid rgba(57, 255, 136, 0.28);
+  border-radius: 8px;
+  color: #7affb1;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72rem;
+  text-decoration: none;
+}
+
+.profile-link:hover {
+  background: #39ff88;
+  color: #00170c;
 }
 
 .rahasia {
@@ -974,5 +1098,21 @@ footer {
   .deck-card {
     width: 190px;
     height: 250px;
+  }
+}
+
+@media (max-width: 680px) {
+  .carousel-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .profile-status {
+    font-size: 0.67rem;
+  }
+
+  .profile {
+    padding: 80px 16px 100px;
   }
 }
