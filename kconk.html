@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writeup | CTF Room</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="writeup.css" />
+  <link rel="stylesheet" href="kconk.css" />
+</head>
+<body>
+  <header class="nav-wrapper">
+    <div class="navbar-pill">
+      <a class="logo" href="index.html" aria-label="Kembali ke halaman utama">
+        <span class="logo-mark">&gt;_</span><span>CTF ROOM</span>
+      </a>
+      <nav aria-label="Navigasi utama">
+        <a href="index.html">Home</a>
+        <a href="writeup.html" class="is-active">Writeups</a>
+        <a href="book.html">Book</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="reader-page">
+    <div class="reader-shell">
+      <div class="reader-toolbar">
+        <a class="reader-back" href="writeup.html"><span aria-hidden="true">←</span> Kembali ke daftar</a>
+        <div class="reader-actions">
+          <button id="printButton" type="button"><span aria-hidden="true">↓</span> Simpan PDF</button>
+        </div>
+      </div>
+
+      <article class="reader-card">
+        <header class="reader-header">
+          <div class="reader-kicker" id="readerMeta">CTF WRITEUP / LOADING</div>
+          <h1 id="readerTitle">Memuat write-up...</h1>
+          <p class="reader-file" id="readerFile"></p>
+        </header>
+        <div id="readerContent" class="writeup-md reader-content">
+          <div class="writeup-empty">Membaca file Markdown...</div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <script src="kconk.js"></script>
+</body>
+</html>

@@ -1,7 +1,23 @@
 /* ================= WRITEUP PAGE ================= */
 body {
-  background: #000000;
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 50% -15%, rgba(57, 255, 136, 0.13), transparent 36rem),
+    #020604;
   color: #f5fff8;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.28;
+  background-image: linear-gradient(rgba(57, 255, 136, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(57, 255, 136, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
 }
 
 .nav-wrapper {
@@ -31,7 +47,7 @@ body {
   justify-content: space-between;
   gap: 0.6rem;
   backdrop-filter: blur(14px);
-  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(180, 255, 211, 0.1);
+  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.42), 0 0 30px rgba(57, 255, 136, 0.06), inset 0 1px 0 rgba(180, 255, 211, 0.1);
   border: 1px solid rgba(105, 255, 164, 0.2);
 }
 
@@ -112,7 +128,8 @@ body {
 
 .hero {
   min-height: auto;
-  background: #000000;
+  position: relative;
+  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -140,6 +157,7 @@ body {
 .scoreboard-intro h1 {
   margin: 0;
   font-size: clamp(2rem, 4vw, 3.25rem);
+  letter-spacing: -0.04em;
 }
 
 .scoreboard-intro .hero-description {
@@ -286,8 +304,9 @@ body {
 .score-card--board {
   padding: clamp(1.15rem, 2.5vw, 2rem);
   border-radius: 18px;
-  background: linear-gradient(145deg, rgba(18, 27, 23, 0.98), rgba(8, 15, 13, 0.98));
-  border-color: rgba(196, 225, 207, 0.17);
+  background: linear-gradient(145deg, rgba(16, 31, 23, 0.98), rgba(4, 13, 9, 0.98));
+  border-color: rgba(117, 255, 177, 0.22);
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(220, 255, 230, 0.08);
 }
 
 .score-card::before {
@@ -578,7 +597,17 @@ body {
 }
 
 .writeup-section {
-  padding: 20px 24px 120px;
+  position: relative;
+  padding: 28px 24px 120px;
+}
+
+.writeup-section::before {
+  content: '';
+  display: block;
+  width: min(1180px, 100%);
+  height: 1px;
+  margin: 0 auto 2.5rem;
+  background: linear-gradient(90deg, transparent, rgba(57, 255, 136, 0.35), transparent);
 }
 
 @media (max-width: 768px) {
@@ -607,11 +636,33 @@ body {
 }
 
 .writeup-card {
-  padding: 2.5rem;
+  position: relative;
+  padding: clamp(1.35rem, 3.5vw, 2.5rem);
   border-radius: 24px;
-  background: linear-gradient(145deg, rgba(8, 20, 16, 0.98), rgba(16, 34, 25, 0.92));
-  border: 1px solid rgba(57, 255, 136, 0.16);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(145deg, rgba(11, 27, 19, 0.96), rgba(4, 13, 9, 0.96));
+  border: 1px solid rgba(117, 255, 177, 0.19);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(220, 255, 230, 0.05);
+}
+
+.writeup-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 12%;
+  width: 28%;
+  height: 1px;
+  background: #39ff88;
+  box-shadow: 0 0 18px rgba(57, 255, 136, 0.75);
+}
+
+.writeup-list-shell {
+  margin-top: 2.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(57, 255, 136, 0.22);
+}
+
+.writeup-list-card {
+  background: linear-gradient(145deg, rgba(8, 22, 16, 0.94), rgba(4, 12, 9, 0.94));
 }
 
 .section-title {
@@ -640,6 +691,12 @@ body {
   border-radius: 22px;
   background: linear-gradient(145deg, rgba(10, 31, 21, 0.92), rgba(3, 12, 9, 0.84));
   box-shadow: inset 0 1px 0 rgba(207, 255, 225, 0.06), 0 14px 38px rgba(0, 0, 0, 0.2);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ctf-event:hover {
+  border-color: rgba(119, 255, 177, 0.4);
+  box-shadow: inset 0 1px 0 rgba(207, 255, 225, 0.08), 0 18px 48px rgba(0, 0, 0, 0.28), 0 0 26px rgba(57, 255, 136, 0.05);
 }
 
 .ctf-event__header {

@@ -1,4 +1,5 @@
 const writeupTableContainer = document.getElementById('writeupTableContainer');
+const writeupListContainer = document.getElementById('writeupListContainer');
 const manifestPath = 'assets/Ctf/manifest.json';
 const MAX_SCORE = 1000;
 const POINTS_PER_WRITEUP = 1;
@@ -138,6 +139,38 @@ function formatInline(text) {
   return html;
 }
 
+function writeupReaderUrl(entry) {
+  return `kconk.html?source=${encodeURIComponent(entry.url)}`;
+}
+
+function renderWriteupList(entries) {
+  if (!writeupListContainer) return;
+  if (!entries.length) {
+    writeupListContainer.innerHTML = '<div class="writeup-empty">Belum ada write-up.</div>';
+    return;
+  }
+
+  writeupListContainer.innerHTML = entries.map((entry, index) => {
+    const readerUrl = writeupReaderUrl(entry);
+    return `
+      <article class="writeup-list-item">
+        <div class="writeup-list-item__index">${String(index + 1).padStart(2, '0')}</div>
+        <div class="writeup-list-item__body">
+          <a class="writeup-list-item__title" href="${readerUrl}">${escapeHtml(entry.challenge)}</a>
+          <div class="writeup-list-item__meta">
+            <span>${escapeHtml(entry.ctfName || 'CTF Archive')}</span>
+            <span>/</span>
+            <span>${escapeHtml(entry.ctfType)}</span>
+            <span>/</span>
+            <span>${escapeHtml(entry.fileName)}</span>
+          </div>
+        </div>
+        <a class="writeup-list-item__button" href="${readerUrl}">Buka write-up <span aria-hidden="true">↗</span></a>
+      </article>
+    `;
+  }).join('');
+}
+
 async function loadWriteupEntries() {
   try {
     const response = await fetch(manifestPath, { cache: 'no-store' });
@@ -236,6 +269,7 @@ async function buildWriteupTable() {
 
   const entries = await loadWriteupEntries();
   updateScoreCard(entries);
+  renderWriteupList(entries);
 
   if (!entries.length) {
     writeupTableContainer.innerHTML = '<div class="writeup-empty">Belum ada file markdown di folder CTF.</div>';
