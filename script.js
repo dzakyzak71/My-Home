@@ -85,6 +85,79 @@ terminalChips.forEach((chip) => {
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 768;
 
+/* ================= MOVING CODE BACKGROUND ================= */
+const codeRain = document.getElementById('codeRain');
+
+if (codeRain) {
+  const context = codeRain.getContext('2d');
+  const snippets = [
+    'const solve = async (flag) => {',
+    'await fetch("/writeup.html");',
+    'if (response.ok) return data;',
+    'function decode(cipher, key) {',
+    'sha256(private_key).digest()',
+    'for (const challenge of ctf) {',
+    'xor ^= buffer[offset];',
+    'return AESGCM.decrypt(nonce);',
+    'const payload = packet.slice(0x20);',
+    'assert(signature.verify(publicKey));',
+    '0x7f 0x45 0x4c 0x46 0x00',
+    'root@ctf:~$ ./solve.py',
+    'status = "enumerating subgroup";',
+    '.../Cryptography/Writeup.md',
+  ];
+  let columns = [];
+  let animationFrame;
+  let lastTime = 0;
+
+  function resizeCodeRain() {
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    codeRain.width = Math.floor(window.innerWidth * ratio);
+    codeRain.height = Math.floor(window.innerHeight * ratio);
+    context.setTransform(ratio, 0, 0, ratio, 0, 0);
+    const columnCount = Math.max(7, Math.floor(window.innerWidth / 160));
+    columns = Array.from({ length: columnCount }, (_, index) => ({
+      x: (index + 0.5) * (window.innerWidth / columnCount),
+      y: Math.random() * window.innerHeight,
+      speed: 5 + Math.random() * 12,
+      text: snippets[Math.floor(Math.random() * snippets.length)],
+      opacity: 0.18 + Math.random() * 0.3,
+      changeIn: 2 + Math.random() * 5,
+    }));
+  }
+
+  function drawCodeRain(timestamp) {
+    const delta = Math.min((timestamp - lastTime) / 1000 || 0, 0.08);
+    lastTime = timestamp;
+    context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    context.font = '12px "Share Tech Mono", monospace';
+    context.textBaseline = 'top';
+
+    columns.forEach(column => {
+      column.y += column.speed * delta;
+      column.changeIn -= delta;
+      if (column.y > window.innerHeight + 30) column.y = -30;
+      if (column.changeIn <= 0) {
+        column.text = snippets[Math.floor(Math.random() * snippets.length)];
+        column.changeIn = 2 + Math.random() * 5;
+      }
+      context.fillStyle = `rgba(57, 255, 136, ${column.opacity})`;
+      context.fillText(column.text, column.x, column.y);
+    });
+
+    animationFrame = requestAnimationFrame(drawCodeRain);
+  }
+
+  resizeCodeRain();
+  window.addEventListener('resize', resizeCodeRain);
+  if (!reduceMotion) {
+    animationFrame = requestAnimationFrame(drawCodeRain);
+  } else {
+    drawCodeRain(0);
+    cancelAnimationFrame(animationFrame);
+  }
+}
+
 /* ================= PROFILE SLIDER ================= */
 const profileSlider = document.getElementById('profileSlider');
 let sliderActive = false;
@@ -93,7 +166,7 @@ let sliderScrollStart = 0;
 
 if (profileSlider) {
   profileSlider.addEventListener('pointerdown', (event) => {
-    if (event.target.closest('a, button')) return;
+    if (event.pointerType !== 'mouse' || event.button !== 0 || event.target.closest('a, button')) return;
     sliderActive = true;
     sliderStartX = event.clientX;
     sliderScrollStart = profileSlider.scrollLeft;
@@ -104,6 +177,7 @@ if (profileSlider) {
   profileSlider.addEventListener('pointermove', (event) => {
     if (!sliderActive) return;
     const diff = event.clientX - sliderStartX;
+    if (Math.abs(diff) < 8) return;
     profileSlider.scrollLeft = sliderScrollStart - diff * 1.1;
     event.preventDefault();
   });
