@@ -42,6 +42,13 @@
       "fileName": "Ucucuga.md",
       "url": "assets/Ctf/Juniorctf/Cryptography/Ucucuga/Ucucuga.md"
     },
+    {
+      "ctfName": "Junior CTF",
+      "ctfType": "Cryptography",
+      "challenge": "TheCakeIsALie",
+      "fileName": "TheCakeIsALie.md",
+      "url": "assets/Ctf/Juniorctf/Cryptography/TheCakeIsALie/TheCakeIsALie.md"
+    },
         {
       "ctfName": "Junior CTF",
       "ctfType": "Forensic",
