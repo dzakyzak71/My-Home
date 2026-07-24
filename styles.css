@@ -1144,3 +1144,92 @@ footer {
     padding: 80px 16px 100px;
   }
 }
+
+@media (max-width: 768px) {
+  .nav-wrapper {
+    height: 68px;
+    padding: 0 8px;
+  }
+
+  .navbar-pill {
+    width: calc(100% - 8px);
+    min-width: 0;
+    padding: 0.42rem 0.5rem 0.42rem 0.65rem;
+    gap: 0.45rem;
+  }
+
+  .navbar-pill nav {
+    min-width: 0;
+    flex: 1;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .navbar-pill nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navbar-pill nav a {
+    flex: 0 0 auto;
+    padding: 0.36rem 0.5rem;
+    font-size: 0.67rem;
+  }
+
+  .logo {
+    flex: 0 0 auto;
+    font-size: 0.7rem;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 100px 16px 56px;
+  }
+
+  .hero-content {
+    width: 100%;
+    gap: 1.6rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 10vw, 2.75rem);
+    overflow-wrap: anywhere;
+  }
+
+  .hero-showcase,
+  .terminal-shell {
+    width: 100%;
+  }
+
+  .terminal-body {
+    padding: 0.8rem;
+  }
+
+  .terminal-output {
+    min-height: 145px;
+  }
+
+  .profile {
+    padding: 70px 12px 90px;
+  }
+
+  .profile-shell {
+    width: 100%;
+  }
+
+  .profile-slider {
+    gap: 12px;
+    margin: 0 -2px;
+    padding: 16px 2px 22px;
+  }
+
+  .slider-card,
+  .slider-card--profile {
+    flex-basis: calc(100vw - 46px);
+    width: calc(100vw - 46px);
+    min-width: calc(100vw - 46px);
+  }
+
+  .slider-card--profile {
+    min-height: 430px;
+  }
+}

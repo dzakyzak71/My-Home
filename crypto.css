@@ -36,3 +36,35 @@ body { color: #effff4; }
 .attack-table td { color: #c5dfce; font-size: .88rem; line-height: 1.55; }
 .ethics-note { margin-top: 1rem; color: #93ae9d; font-size: .82rem; line-height: 1.6; }
 @media (max-width: 760px) { .crypto-page { width: min(100% - 28px, 1180px); padding-top: 106px; } .crypto-hero { grid-template-columns: 1fr; gap: 1rem; } .crypto-map { max-width: none; } .lesson-grid, .lesson-grid--two { grid-template-columns: 1fr; } .lesson-card--wide { grid-column: auto; } }
+
+@media (max-width: 520px) {
+  .crypto-page {
+    width: calc(100% - 24px);
+    padding-top: 98px;
+    padding-bottom: 60px;
+  }
+
+  .crypto-hero h1 {
+    font-size: clamp(2.1rem, 11vw, 3rem);
+  }
+
+  .chapter-nav {
+    gap: 0.35rem;
+  }
+
+  .chapter-nav a {
+    font-size: 0.68rem;
+  }
+
+  .crypto-level {
+    padding: 1.4rem 0;
+  }
+
+  .level-heading {
+    gap: 0.55rem;
+  }
+
+  .lesson-card {
+    padding: 1rem;
+  }
+}

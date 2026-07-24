@@ -1038,3 +1038,82 @@ body::before {
     padding-bottom: 0.8rem;
   }
 }
+
+@media (max-width: 680px) {
+  .navbar-pill {
+    width: calc(100% - 8px);
+    min-width: 0;
+    gap: 0.35rem;
+  }
+
+  .navbar-pill nav {
+    min-width: 0;
+    flex: 1;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .navbar-pill nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navbar-pill nav a {
+    flex: 0 0 auto;
+    padding: 0.35rem 0.45rem;
+    font-size: 0.66rem;
+  }
+
+  .hero {
+    padding: 98px 14px 48px;
+  }
+
+  .scoreboard-intro h1 {
+    font-size: clamp(2rem, 10vw, 2.7rem);
+  }
+
+  .score-card--board {
+    padding: 1rem;
+  }
+
+  .score-card__header {
+    align-items: center;
+  }
+
+  .score-card__value strong {
+    font-size: 1.8rem;
+  }
+
+  .score-chart svg {
+    min-width: 560px;
+  }
+
+  .score-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .writeup-section,
+  .writeup-list-section {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .writeup-card {
+    padding: 1rem;
+    border-radius: 17px;
+  }
+
+  .ctf-event {
+    padding: 0.65rem;
+    border-radius: 16px;
+  }
+
+  .category-table__header,
+  .ctf-event__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .table-scroll {
+    max-height: 390px;
+  }
+}
